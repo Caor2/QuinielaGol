@@ -1,0 +1,61 @@
+﻿@model Quiniela.Models.indexModels
+
+@{
+    ViewBag.Title = "UNI-Quiniela";
+}
+
+<div class="jumbotron text-center">
+    <h1>Proximos partidos.</h1>
+    <table id="nextTable" class="table table-bordered table-striped">
+        <tr>
+            <td>Fecha</td>
+            <td>Local</td>
+            <td></td>
+            <td>Visitante</td>
+            <td>Estado</td>
+        </tr>
+        @foreach (var item in Model.matches)
+        {
+            <tr>
+                <td>@item.Date</td>
+                <td>@item.Local</td>
+                <td>VS</td>
+                <td>@item.Visitor</td>
+                @switch (@item.Status)
+                {
+                    case 0:
+                        <td style="color: cornflowerblue">Próximo</td>
+                        break;
+                    case 1:
+                        <td style="color: green">En emisión</td>
+                        break;
+                    case 2:
+                        <td style="color: indianred">Finalizado</td>
+                        break;
+                }
+            </tr>
+        }
+    </table>
+</div>
+
+<div class="jumbotron text-center">
+
+    @if (Model.ranking.LongCount() > 0)
+    {
+        <h1>Ranking.</h1>
+        <table id="rankingTable" class="table table-bordered table-striped">
+            <tr>
+                <td>Usuario</td>
+                <td>Puntos</td>
+            </tr>
+            @foreach (var item in Model.ranking)
+            {
+                <tr>
+                    <td>@item.UserName</td>
+                    <td>@item.Points</td>
+                </tr>
+            }
+        </table>
+    }
+    else { <h1>Ranking no disponible.</h1>}
+</div>

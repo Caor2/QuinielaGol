@@ -1,0 +1,41 @@
+﻿@model List<Quiniela.Models.Match>
+
+@{
+    ViewBag.Title = "Tabla de partidos";
+}
+
+<div class="jumbotron text-center">
+    <h1>@ViewBag.Title.</h1>
+    <table id="matchTable" class="table table-bordered table-striped">
+        <tr>
+            <td>#</td>
+            <td>Fecha</td>
+            <td>Local</td>
+            <td></td>
+            <td>Visitante</td>
+            <td>Estado</td>
+        </tr>
+        @foreach (var item in Model)
+{
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Date</td>
+            <td>@item.Local</td>
+            <td>VS</td>
+            <td>@item.Visitor</td>
+            @switch (@item.Status)
+            {
+                case 0:
+                    <td style="color: cornflowerblue">Próximo</td>
+                    break;
+                case 1:
+                    <td style="color: green">En emisión</td>
+                    break;
+                case 2:
+                    <td style="color: indianred">Finalizado</td>
+                    break;
+            }
+        </tr>
+        }
+    </table>
+</div>

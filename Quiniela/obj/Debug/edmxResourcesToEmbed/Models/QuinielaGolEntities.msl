@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="QuinielaGolModelStoreContainer" CdmEntityContainer="QuinielaGolEntities">
+    <EntitySetMapping Name="Prediction">
+      <EntityTypeMapping TypeName="QuinielaGolModel.Prediction">
+        <MappingFragment StoreEntitySet="Prediction">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="MatchId" ColumnName="MatchId" />
+          <ScalarProperty Name="LocalGoals" ColumnName="LocalGoals" />
+          <ScalarProperty Name="VisitorGoals" ColumnName="VisitorGoals" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ranking">
+      <EntityTypeMapping TypeName="QuinielaGolModel.Ranking">
+        <MappingFragment StoreEntitySet="Ranking">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Points" ColumnName="Points" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Match">
+      <EntityTypeMapping TypeName="QuinielaGolModel.Match">
+        <MappingFragment StoreEntitySet="Match">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="VisitorGoals" ColumnName="VisitorGoals" />
+          <ScalarProperty Name="LocalGoals" ColumnName="LocalGoals" />
+          <ScalarProperty Name="Visitor" ColumnName="Visitor" />
+          <ScalarProperty Name="Local" ColumnName="Local" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
