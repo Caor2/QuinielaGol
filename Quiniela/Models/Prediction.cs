@@ -21,5 +21,6 @@ namespace Quiniela.Models
         public int VisitorGoals { get; set; }
     
         public virtual Match Match { get; set; }
+        public virtual AspNetUsers AspNetUsers { get; set; }
     }
 }

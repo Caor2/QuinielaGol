@@ -1,4 +1,4 @@
-﻿@model Quiniela.Models.predictionModels
+﻿@model List<Quiniela.Models.Prediction>
 
 @{
     ViewBag.Title = "Cargar Predicción";
@@ -21,27 +21,29 @@
 
             </i>
             <input type="file" class="upload" name="UploadedFile" id="fileLoadDoc" accept=".xlsx" />
-            <div><button id="saveChanges" class="btn btn-primary" style="margin-top: 30px" >Guardar</button></div>
+            <div><button id="saveChanges" class="btn btn-primary" style="margin-top: 30px">Guardar</button></div>
         }
-        
+
     </div>
 </div>
 
 <h3 id="message" class="text-center"></h3>
 
 <div class="jumbotron text-center">
-    @if (Model.userPredicts.LongCount() > 0)
+    @if (Model.LongCount() > 0)
     {
         <h1>Tus predicciones.</h1>
         <table id="usrTable" class="table table-bordered table-striped">
-            <tr>
-                <td>Equipo Local</td>
-                <td>GL</td>
-                <td>GV</td>
-                <td>Equipo Visitante</td>
-            </tr>
+            <thead>
+                <tr>
+                    <th class="text-center">Equipo Local</th>
+                    <th class="text-center">GL</th>
+                    <th class="text-center">GV</th>
+                    <th class="text-center">Equipo Visitante</th>
+                </tr>
+            </thead>
 
-            @foreach (var item in Model.userPredicts)
+            @foreach (var item in Model)
             {
                 <tr>
                     <td>@item.Match.Local</td>
@@ -56,39 +58,10 @@
     { <h1>No tienes predicciones.</h1>}
 </div>
 
-<div class="table-condensed text-center">
-    @if (Model.anotherPredicts.LongCount() > 0)
-    {
-        <h1>Otras predicciones.</h1>
-        <table id="usrTable" class="table table-bordered table-striped">
-            <tr>
-                <td>Usuario</td>
-                <td>Equipo Local</td>
-                <td>GL</td>
-                <td>GV</td>
-                <td>Equipo Visitante</td>
-            </tr>
-
-            @foreach (var item in Model.anotherPredicts)
-            {
-                <tr>
-                    <td>@item.UserId.</td>
-                    <td>@item.Match.Local</td>
-                    <td>@item.LocalGoals</td>
-                    <td>@item.VisitorGoals</td>
-                    <td>@item.Match.Visitor</td>
-                </tr>
-            }
-        </table>
-    }
-    else
-    { <h1>No hay mas predicciones.</h1>}
-</div>
-
 <!-- Script -->
 <script>
     $(function () {
-        $('input[type="file"]').change(function (e) {
+        $('#saveChanges').change(function (e) {
             debugger
             var filename = e.target.files[0].name;
             var Files = $("#fileLoadDoc").get(0);
@@ -99,7 +72,7 @@
                 formdata.append(e.target.files[i].name, e.target.files[i]);
             }
             $.ajax({
-                url: '@Url.Action("UploadFile", "Home")',
+                url: '@Url.Action("Prediction", "Home")',
                 type: "POST",
                 datatype: "JSON",
                 contentType: false,
@@ -112,23 +85,20 @@
                         var table = [];
                         var excelArray = [];
 
-                        if(result.data[0]==null){
+                        if (result.data[0] == null) {
                             for (var i = 7; i < result.data.length; i++) {
                                 excelArray.push(result.data[i]);
                             }
-
                             result.row--;
                             result.data = excelArray;
                             console.log(result);
                             console.log(excelArray);
 
-                            var n=7;
+                            var n = 7;
                             while (n < excelArray.length) {
                                 for (var i = 0; i < 6; i++) {
                                     _party[excelArray[i]]
                                 }
-
-
                             }
                         }
                     }
@@ -145,4 +115,3 @@
         $("#fileLoadDoc").trigger('click');
     }
 </script>
-

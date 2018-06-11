@@ -208,6 +208,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AspNetUsers.cs">
+      <DependentUpon>QuinielaGolEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\indexModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -217,7 +220,6 @@
     <Compile Include="Models\Prediction.cs">
       <DependentUpon>QuinielaGolEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\predictionModels.cs" />
     <Compile Include="Models\QuinielaGolEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -316,6 +318,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Home\AnotherPredicts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

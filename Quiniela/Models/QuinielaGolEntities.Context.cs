@@ -28,5 +28,6 @@ namespace Quiniela.Models
         public virtual DbSet<Prediction> Prediction { get; set; }
         public virtual DbSet<Ranking> Ranking { get; set; }
         public virtual DbSet<Match> Match { get; set; }
+        public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
     }
 }

@@ -7,13 +7,15 @@
 <div class="jumbotron text-center">
     <h1>Proximos partidos.</h1>
     <table id="nextTable" class="table table-bordered table-striped">
-        <tr>
-            <td>Fecha</td>
-            <td>Local</td>
-            <td></td>
-            <td>Visitante</td>
-            <td>Estado</td>
-        </tr>
+        <thead>
+            <tr>
+                <th class="text-center">Fecha</th>
+                <th class="text-center">Local</th>
+                <th></th>
+                <th class="text-center">Visitante</th>
+                <th class="text-center">Estado</th>
+            </tr>
+        </thead>
         @foreach (var item in Model.matches)
         {
             <tr>
@@ -44,18 +46,21 @@
     {
         <h1>Ranking.</h1>
         <table id="rankingTable" class="table table-bordered table-striped">
+            <thead>
             <tr>
-                <td>Usuario</td>
-                <td>Puntos</td>
+                <th class="text-center">Usuario</th>
+                <th class="text-center">Puntos</th>
             </tr>
+            </thead>
             @foreach (var item in Model.ranking)
             {
                 <tr>
-                    <td>@item.UserName</td>
+                    <td>@Html.ActionLink(item.UserName, "AnotherPredicts", new { searching = item.Id })</td>
                     <td>@item.Points</td>
                 </tr>
             }
         </table>
     }
     else { <h1>Ranking no disponible.</h1>}
+
 </div>

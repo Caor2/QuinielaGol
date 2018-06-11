@@ -9,6 +9,8 @@
         <EntityTypeShape EntityType="QuinielaGolModel.Ranking" Width="1.5" PointX="1.375" PointY="3.875" IsExpanded="true" />
         <EntityTypeShape EntityType="QuinielaGolModel.Match" Width="1.5" PointX="0.75" PointY="0.75" />
         <AssociationConnector Association="QuinielaGolModel.FK_Prediction_Match" />
+        <EntityTypeShape EntityType="QuinielaGolModel.AspNetUsers" Width="1.5" PointX="3.375" PointY="5" />
+        <AssociationConnector Association="QuinielaGolModel.FK_Prediction_AspNetUsers" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -2,40 +2,45 @@
 
 @{
     ViewBag.Title = "Tabla de partidos";
+
 }
+
+
 
 <div class="jumbotron text-center">
     <h1>@ViewBag.Title.</h1>
-    <table id="matchTable" class="table table-bordered table-striped">
-        <tr>
-            <td>#</td>
-            <td>Fecha</td>
-            <td>Local</td>
-            <td></td>
-            <td>Visitante</td>
-            <td>Estado</td>
-        </tr>
+    <table id="matchTable" class="table table-bordered table-striped table-responsive">
+        <thead>
+            <tr>
+                <th class="text-center">#</th>
+                <th class="text-center">Fecha</th>
+                <th class="text-center">Local</th>
+                <th class="text-center"></th>
+                <th class="text-center">Visitante</th>
+                <th class="text-center">Estado</th>
+            </tr>
+        </thead>
         @foreach (var item in Model)
-{
-        <tr>
-            <td>@item.Id</td>
-            <td>@item.Date</td>
-            <td>@item.Local</td>
-            <td>VS</td>
-            <td>@item.Visitor</td>
-            @switch (@item.Status)
-            {
-                case 0:
-                    <td style="color: cornflowerblue">Próximo</td>
-                    break;
-                case 1:
-                    <td style="color: green">En emisión</td>
-                    break;
-                case 2:
-                    <td style="color: indianred">Finalizado</td>
-                    break;
-            }
-        </tr>
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Date</td>
+                <td>@item.Local</td>
+                <td>VS</td>
+                <td>@item.Visitor</td>
+                @switch (@item.Status)
+                {
+                    case 0:
+                        <td style="color: cornflowerblue">Próximo</td>
+                        break;
+                    case 1:
+                        <td style="color: green">En emisión</td>
+                        break;
+                    case 2:
+                        <td style="color: indianred">Finalizado</td>
+                        break;
+                }
+            </tr>
         }
     </table>
 </div>

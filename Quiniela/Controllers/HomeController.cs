@@ -27,7 +27,7 @@ namespace Quiniela.Controllers
             //List<Prediction> usersPredictions = db.Prediction.ToList<Prediction>();
             List<Ranking> usersRank = db.Ranking.ToList<Ranking>();
 
-            var model = new indexModels();
+            indexModels model = new indexModels();
             model.matches = nextMatches;
             //model.predictions = usersPredictions;
             model.ranking = usersRank.OrderByDescending(o => o.Points).ToList();
@@ -35,25 +35,16 @@ namespace Quiniela.Controllers
             return View(model);
         }
 
+
+
         public ActionResult Prediction()
         {
             QuinielaGolEntities db = new QuinielaGolEntities();
             string _user = User.Identity.GetUserId();
 
-            List<usrTranslations> usersList = new List<usrTranslations>();
-            List<Prediction> userPredicts = db.Prediction.Where(x => x.UserId == _user ).ToList<Prediction>();
-            List<Prediction> anotherPredictions = db.Prediction.Where(x => x.UserId != _user).ToList<Prediction>();
+            List<Prediction> userPredicts = db.Prediction.Where(x => x.UserId == _user).ToList<Prediction>();
 
-            foreach (var item in db.Ranking) {
-                usersList.Add(new usrTranslations { Identifier = item.Id, Pseudo = item.UserName });
-            }
-
-            var model = new predictionModels();
-            model.userList = usersList;
-            model.userPredicts = userPredicts;
-            model.anotherPredicts = anotherPredictions;
-
-            return View(model);
+            return View(userPredicts);
         }
 
         public JsonResult UploadFile()
@@ -61,7 +52,7 @@ namespace Quiniela.Controllers
             string UserId = User.Identity.GetUserId();
             QuinielaGolEntities db = new QuinielaGolEntities();
             bool alreadyUploaded = db.Prediction.Select(x => x.UserId).Contains(UserId);
-            DateTime limitDay = db.Match.FirstOrDefault().Date.Value; 
+            DateTime limitDay = db.Match.FirstOrDefault().Date.Value;
 
             if (DateTime.Today >= limitDay)
             {
@@ -70,9 +61,8 @@ namespace Quiniela.Controllers
             else {
                 if (alreadyUploaded)
                 {
-
                     var toDelete = db.Prediction.Where(x => x.UserId == UserId).ToList<Prediction>();
-                    db.Prediction.RemoveRange(toDelete); 
+                    db.Prediction.RemoveRange(toDelete);
                 }
                 if (Request.Files.Count > 0)
                 {
@@ -107,6 +97,7 @@ namespace Quiniela.Controllers
                             }
                             db.Prediction.AddRange(predictions);
                             db.SaveChanges();
+                            Response.Redirect("/Home/Prediction");
                         }
                         return Json(new { status = "OK" }, JsonRequestBehavior.AllowGet);
                     }
@@ -120,18 +111,32 @@ namespace Quiniela.Controllers
 
             return Json("No se ha cargado ningun archivo.", JsonRequestBehavior.AllowGet);
         }
-        
+
         public ActionResult Matches()
         {
             QuinielaGolEntities db = new QuinielaGolEntities();
             List<Match> matches = new List<Match>();
             matches = db.Match.ToList<Match>();
 
-            foreach (Match m in matches) {
+            foreach (Match m in matches)
+            {
                 m.Date = m.Date.Value.AddHours(-6);
             }
 
             return View(matches);
         }
+
+        public ActionResult AnotherPredicts(string searching)
+        {
+            QuinielaGolEntities db = new QuinielaGolEntities();
+
+            List<Prediction> otherPredicts = db.Prediction.Where(x => x.UserId == searching).ToList();
+
+            return View(otherPredicts);
+        }
+
+        // Excel Area -----------------------------------------------------------------------------------
+
+
     }
 }
