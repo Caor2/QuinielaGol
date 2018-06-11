@@ -1,4 +1,6 @@
-﻿@{
+﻿@model Quiniela.Models.predictionModels
+
+@{
     ViewBag.Title = "Cargar Predicción";
 }
 <head>
@@ -19,18 +21,71 @@
 
             </i>
             <input type="file" class="upload" name="UploadedFile" id="fileLoadDoc" accept=".xlsx" />
-            <div><button id="saveChanges" onclick="">Guardar</button></div>
+            <div><button id="saveChanges" class="btn btn-primary" style="margin-top: 30px" >Guardar</button></div>
         }
-
-        <h1 id="tableHead" hidden="hidden">Predicción.</h1>
-        <table class="table table-bordered table-responsive table-striped">
-            <thead class="head">
-            </thead>
-            <tbody class="body"></tbody>
-        </table>
-        <label id="message"></label>
+        
     </div>
 </div>
+
+<h3 id="message" class="text-center"></h3>
+
+<div class="jumbotron text-center">
+    @if (Model.userPredicts.LongCount() > 0)
+    {
+        <h1>Tus predicciones.</h1>
+        <table id="usrTable" class="table table-bordered table-striped">
+            <tr>
+                <td>Equipo Local</td>
+                <td>GL</td>
+                <td>GV</td>
+                <td>Equipo Visitante</td>
+            </tr>
+
+            @foreach (var item in Model.userPredicts)
+            {
+                <tr>
+                    <td>@item.Match.Local</td>
+                    <td>@item.LocalGoals</td>
+                    <td>@item.VisitorGoals</td>
+                    <td>@item.Match.Visitor</td>
+                </tr>
+            }
+        </table>
+    }
+    else
+    { <h1>No tienes predicciones.</h1>}
+</div>
+
+<div class="table-condensed text-center">
+    @if (Model.anotherPredicts.LongCount() > 0)
+    {
+        <h1>Otras predicciones.</h1>
+        <table id="usrTable" class="table table-bordered table-striped">
+            <tr>
+                <td>Usuario</td>
+                <td>Equipo Local</td>
+                <td>GL</td>
+                <td>GV</td>
+                <td>Equipo Visitante</td>
+            </tr>
+
+            @foreach (var item in Model.anotherPredicts)
+            {
+                <tr>
+                    <td>@item.UserId.</td>
+                    <td>@item.Match.Local</td>
+                    <td>@item.LocalGoals</td>
+                    <td>@item.VisitorGoals</td>
+                    <td>@item.Match.Visitor</td>
+                </tr>
+            }
+        </table>
+    }
+    else
+    { <h1>No hay mas predicciones.</h1>}
+</div>
+
+<!-- Script -->
 <script>
     $(function () {
         $('input[type="file"]').change(function (e) {
@@ -72,57 +127,16 @@
                                 for (var i = 0; i < 6; i++) {
                                     _party[excelArray[i]]
                                 }
+
+
                             }
                         }
-                    }
-                    debugger
-                    var count = 0;
-                    if (result != null) {
-                        debugger
-                        $("#message").css('color','green').text("Archivo cargado correctamente.")
-                        $(".head").empty();
-                        $(".body").empty();
-                        
-                        for (var i = 0; i < result.row; i++) {
-                            if (i == 0) {
-                                $(".head").append("<tr>");
-                            }
-                            else {
-                                $(".body").append("<tr class='tr"+i+"'>");
-                            }
-                            for (var j = 0; j < result.col; j++) {
-                                if (i==0) {
-                                    $(".head tr").append("<th>" + result.data[count] + "</th>");
-                                }
-                                else
-                                {
-                                    if (result.data[count]!=null) {
-                                        $(".body .tr" + i + "").append("<td>" + result.data[count] + "</td>");
-                                    }
-                                    else
-                                    {
-                                        $(".body .tr" + i + "").append("<td></td>");
-                                    }
-                                }
-                                count++;
-                            }
-                            if (i == 0) {
-                                $(".head").append("</tr>");
-                            }
-                            else
-                            {
-                                $(".body .tr"+i+"").append("</tr>");
-                            }
-                        }
-                    }
-                    else
-                    {
-                        $("#message").css('color', 'red').text("Carga de archivo fallida.")
                     }
                 }
             })
         });
     });
+
     function fileLoad() {
         debugger
         $('#txtfile').val("");

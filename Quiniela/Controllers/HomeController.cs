@@ -16,16 +16,16 @@ namespace Quiniela.Controllers
         public ActionResult Index()
         {
             QuinielaGolEntities db = new QuinielaGolEntities();
-            
+
             //update Matches States Here
 
-            int nearDay = db.Match.Where(x => x.Status == 0).FirstOrDefault().Date.Value.Day; //.Select(x => x.Date.Value.Day as )
+            int nearDay = db.Match.Where(x => x.Status == 0).FirstOrDefault().Date.Value.Day;
 
             List<Match> nextMatches = db.Match.Where(x => x.Date.Value.Day == nearDay).ToList<Match>();
-            List<Prediction> usersPredictions = db.Prediction.ToList<Prediction>();
-            List<Ranking> usersRank = db.Ranking.ToList<Ranking>();
+            //List<Match> nextMatches = db.Match.ToList<Match>();
 
-            //Set UsersRank Points Here
+            //List<Prediction> usersPredictions = db.Prediction.ToList<Prediction>();
+            List<Ranking> usersRank = db.Ranking.ToList<Ranking>();
 
             var model = new indexModels();
             model.matches = nextMatches;
@@ -37,7 +37,23 @@ namespace Quiniela.Controllers
 
         public ActionResult Prediction()
         {
-            return View();
+            QuinielaGolEntities db = new QuinielaGolEntities();
+            string _user = User.Identity.GetUserId();
+
+            List<usrTranslations> usersList = new List<usrTranslations>();
+            List<Prediction> userPredicts = db.Prediction.Where(x => x.UserId == _user ).ToList<Prediction>();
+            List<Prediction> anotherPredictions = db.Prediction.Where(x => x.UserId != _user).ToList<Prediction>();
+
+            foreach (var item in db.Ranking) {
+                usersList.Add(new usrTranslations { Identifier = item.Id, Pseudo = item.UserName });
+            }
+
+            var model = new predictionModels();
+            model.userList = usersList;
+            model.userPredicts = userPredicts;
+            model.anotherPredicts = anotherPredictions;
+
+            return View(model);
         }
 
         public JsonResult UploadFile()
@@ -104,12 +120,16 @@ namespace Quiniela.Controllers
 
             return Json("No se ha cargado ningun archivo.", JsonRequestBehavior.AllowGet);
         }
-
+        
         public ActionResult Matches()
         {
             QuinielaGolEntities db = new QuinielaGolEntities();
             List<Match> matches = new List<Match>();
             matches = db.Match.ToList<Match>();
+
+            foreach (Match m in matches) {
+                m.Date = m.Date.Value.AddHours(-6);
+            }
 
             return View(matches);
         }

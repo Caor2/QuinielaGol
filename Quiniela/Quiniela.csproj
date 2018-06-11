@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -216,6 +217,7 @@
     <Compile Include="Models\Prediction.cs">
       <DependentUpon>QuinielaGolEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\predictionModels.cs" />
     <Compile Include="Models\QuinielaGolEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
