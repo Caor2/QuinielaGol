@@ -413,3 +413,11 @@ Z:\Users\InternetPower\QuinielaGol\Quiniela\bin\Microsoft.Owin.Security.Microsof
 Z:\Users\InternetPower\QuinielaGol\Quiniela\obj\Debug\Quiniela.csprojResolveAssemblyReference.cache
 Z:\Users\InternetPower\QuinielaGol\Quiniela\obj\Debug\Quiniela.dll
 Z:\Users\InternetPower\QuinielaGol\Quiniela\obj\Debug\Quiniela.pdb
+C:\Users\Charles\Documents\Develop\Visual Studio Projects\QuinielaGol\Quiniela\bin\ClosedXML.dll
+C:\Users\Charles\Documents\Develop\Visual Studio Projects\QuinielaGol\Quiniela\bin\DocumentFormat.OpenXml.dll
+C:\Users\Charles\Documents\Develop\Visual Studio Projects\QuinielaGol\Quiniela\bin\ExcelNumberFormat.dll
+C:\Users\Charles\Documents\Develop\Visual Studio Projects\QuinielaGol\Quiniela\bin\FastMember.Signed.dll
+C:\Users\Charles\Documents\Develop\Visual Studio Projects\QuinielaGol\Quiniela\bin\ClosedXML.pdb
+C:\Users\Charles\Documents\Develop\Visual Studio Projects\QuinielaGol\Quiniela\bin\ClosedXML.xml
+C:\Users\Charles\Documents\Develop\Visual Studio Projects\QuinielaGol\Quiniela\bin\DocumentFormat.OpenXml.xml
+C:\Users\Charles\Documents\Develop\Visual Studio Projects\QuinielaGol\Quiniela\bin\ExcelNumberFormat.xml
