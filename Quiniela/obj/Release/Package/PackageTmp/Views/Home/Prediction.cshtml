@@ -1,0 +1,117 @@
+﻿@model List<Quiniela.Models.Prediction>
+
+@{
+    ViewBag.Title = "Cargar Predicción";
+}
+<head>
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <h2>@ViewBag.Title.</h2>
+</head>
+
+<div class="row" style="padding:15px">
+    <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6" id="filePathtxt">
+        <label class="Flabel">Selecciona el archivo.</label>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6" id="filePathInput">
+
+        @using (Html.BeginForm("UploadFile", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <input hidden="hidden" type="text" class="" id="txtfile" for="uploadXML" />
+            <i id="btnFileLoad" class="fileUpload fa fa-file pull-right" area-hidden="true" onclick="return fileLoad()" style="margin-top:2px;font-size:21px;position:relative;cursor:pointer;color:forestgreen;left:-172px">
+
+            </i>
+            <input type="file" class="upload" name="UploadedFile" id="fileLoadDoc" accept=".xlsx" />
+            <div><button id="saveChanges" class="btn btn-primary" style="margin-top: 30px">Guardar</button></div>
+        }
+
+    </div>
+</div>
+
+<h3 id="message" class="text-center"></h3>
+
+<div class="jumbotron text-center">
+    @if (Model.LongCount() > 0)
+    {
+        <h1>Tus predicciones.</h1>
+        <table id="usrTable" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th class="text-center">Equipo Local</th>
+                    <th class="text-center">GL</th>
+                    <th class="text-center">GV</th>
+                    <th class="text-center">Equipo Visitante</th>
+                </tr>
+            </thead>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Match.Local</td>
+                    <td>@item.LocalGoals</td>
+                    <td>@item.VisitorGoals</td>
+                    <td>@item.Match.Visitor</td>
+                </tr>
+            }
+        </table>
+    }
+    else
+    { <h1>No tienes predicciones.</h1>}
+</div>
+
+<!-- Script -->
+<script>
+    $(function () {
+        $('#saveChanges').change(function (e) {
+            debugger
+            var filename = e.target.files[0].name;
+            var Files = $("#fileLoadDoc").get(0);
+            $("#txtfile").val(filename);
+            // $("#btnsbmt").trigger("click");
+            formdata = new FormData();
+            for (var i = 0; i < e.target.files.length; i++) {
+                formdata.append(e.target.files[i].name, e.target.files[i]);
+            }
+            $.ajax({
+                url: '@Url.Action("Prediction", "Home")',
+                type: "POST",
+                datatype: "JSON",
+                contentType: false,
+                processData: false,
+                data: formdata,
+                success: function (result) {
+                    //result to object
+                    if (result != null) {
+                        var _party = {};
+                        var table = [];
+                        var excelArray = [];
+
+                        if (result.data[0] == null) {
+                            for (var i = 7; i < result.data.length; i++) {
+                                excelArray.push(result.data[i]);
+                            }
+                            result.row--;
+                            result.data = excelArray;
+                            console.log(result);
+                            console.log(excelArray);
+
+                            var n = 7;
+                            while (n < excelArray.length) {
+                                for (var i = 0; i < 6; i++) {
+                                    _party[excelArray[i]]
+                                }
+                            }
+                        }
+                    }
+                }
+            })
+        });
+    });
+
+    function fileLoad() {
+        debugger
+        $('#txtfile').val("");
+        $('#fileLoadDoc').val("");
+        $('#btnFileLoad').val("");
+        $("#fileLoadDoc").trigger('click');
+    }
+</script>

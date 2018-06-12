@@ -1,0 +1,34 @@
+﻿@model List<Quiniela.Models.Prediction>
+
+@{
+    ViewBag.Title = "Predicciones";
+}
+
+<h2>Predicciones.</h2>
+
+<div class="jumbotron text-center">
+    @if (Model.LongCount() > 0)
+    {
+        <h1>Predicciones de @Model.Select(x => x.AspNetUsers).FirstOrDefault().UserName </h1>
+        <table id="predictionsTable" class="table table-bordered table-striped">
+            <tr class="text-center">
+                <th>Equipo Local</th>
+                <th>GL</th>
+                <th>GV</th>
+                <th>Equipo Visitante</th>
+            </tr>
+            
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Match.Local</td>
+                    <td>@item.LocalGoals</td>
+                    <td>@item.VisitorGoals   </td>
+                    <td>@item.Match.Visitor</td>
+                </tr>
+            }
+        </table>
+    }
+    else
+    { <h1>No hay predicciones.</h1>}
+</div>

@@ -331,6 +331,14 @@ C:\Users\Charles\Documents\Develop\Visual Studio Projects\QuinielaGol\Quiniela\o
 C:\Users\Charles\Documents\Develop\Visual Studio Projects\QuinielaGol\Quiniela\obj\Debug\Quiniela.csproj.CopyComplete
 C:\Users\Charles\Documents\Develop\Visual Studio Projects\QuinielaGol\Quiniela\obj\Debug\Quiniela.dll
 C:\Users\Charles\Documents\Develop\Visual Studio Projects\QuinielaGol\Quiniela\obj\Debug\Quiniela.pdb
+C:\Users\Charles\Documents\Develop\Visual Studio Projects\QuinielaGol\Quiniela\bin\ClosedXML.dll
+C:\Users\Charles\Documents\Develop\Visual Studio Projects\QuinielaGol\Quiniela\bin\DocumentFormat.OpenXml.dll
+C:\Users\Charles\Documents\Develop\Visual Studio Projects\QuinielaGol\Quiniela\bin\ExcelNumberFormat.dll
+C:\Users\Charles\Documents\Develop\Visual Studio Projects\QuinielaGol\Quiniela\bin\FastMember.Signed.dll
+C:\Users\Charles\Documents\Develop\Visual Studio Projects\QuinielaGol\Quiniela\bin\ClosedXML.pdb
+C:\Users\Charles\Documents\Develop\Visual Studio Projects\QuinielaGol\Quiniela\bin\ClosedXML.xml
+C:\Users\Charles\Documents\Develop\Visual Studio Projects\QuinielaGol\Quiniela\bin\DocumentFormat.OpenXml.xml
+C:\Users\Charles\Documents\Develop\Visual Studio Projects\QuinielaGol\Quiniela\bin\ExcelNumberFormat.xml
 Z:\Users\InternetPower\QuinielaGol\Quiniela\bin\ApplicationInsights.config
 Z:\Users\InternetPower\QuinielaGol\Quiniela\bin\roslyn\csc.exe
 Z:\Users\InternetPower\QuinielaGol\Quiniela\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
@@ -348,8 +356,12 @@ Z:\Users\InternetPower\QuinielaGol\Quiniela\bin\Quiniela.dll.config
 Z:\Users\InternetPower\QuinielaGol\Quiniela\bin\Quiniela.dll
 Z:\Users\InternetPower\QuinielaGol\Quiniela\bin\Quiniela.pdb
 Z:\Users\InternetPower\QuinielaGol\Quiniela\bin\Antlr3.Runtime.dll
+Z:\Users\InternetPower\QuinielaGol\Quiniela\bin\ClosedXML.dll
+Z:\Users\InternetPower\QuinielaGol\Quiniela\bin\DocumentFormat.OpenXml.dll
 Z:\Users\InternetPower\QuinielaGol\Quiniela\bin\EntityFramework.dll
 Z:\Users\InternetPower\QuinielaGol\Quiniela\bin\EntityFramework.SqlServer.dll
+Z:\Users\InternetPower\QuinielaGol\Quiniela\bin\ExcelNumberFormat.dll
+Z:\Users\InternetPower\QuinielaGol\Quiniela\bin\FastMember.Signed.dll
 Z:\Users\InternetPower\QuinielaGol\Quiniela\bin\Microsoft.AI.Agent.Intercept.dll
 Z:\Users\InternetPower\QuinielaGol\Quiniela\bin\Microsoft.AI.DependencyCollector.dll
 Z:\Users\InternetPower\QuinielaGol\Quiniela\bin\Microsoft.AI.PerfCounterCollector.dll
@@ -381,6 +393,10 @@ Z:\Users\InternetPower\QuinielaGol\Quiniela\bin\System.Web.WebPages.Deployment.d
 Z:\Users\InternetPower\QuinielaGol\Quiniela\bin\System.Web.WebPages.dll
 Z:\Users\InternetPower\QuinielaGol\Quiniela\bin\System.Web.WebPages.Razor.dll
 Z:\Users\InternetPower\QuinielaGol\Quiniela\bin\WebGrease.dll
+Z:\Users\InternetPower\QuinielaGol\Quiniela\bin\ClosedXML.pdb
+Z:\Users\InternetPower\QuinielaGol\Quiniela\bin\ClosedXML.xml
+Z:\Users\InternetPower\QuinielaGol\Quiniela\bin\DocumentFormat.OpenXml.xml
+Z:\Users\InternetPower\QuinielaGol\Quiniela\bin\ExcelNumberFormat.xml
 Z:\Users\InternetPower\QuinielaGol\Quiniela\bin\Microsoft.AI.DependencyCollector.xml
 Z:\Users\InternetPower\QuinielaGol\Quiniela\bin\Microsoft.AI.ServerTelemetryChannel.xml
 Z:\Users\InternetPower\QuinielaGol\Quiniela\bin\Microsoft.AI.Web.xml
@@ -410,14 +426,6 @@ Z:\Users\InternetPower\QuinielaGol\Quiniela\bin\Microsoft.Owin.Security.OAuth.xm
 Z:\Users\InternetPower\QuinielaGol\Quiniela\bin\Microsoft.Owin.Security.Google.xml
 Z:\Users\InternetPower\QuinielaGol\Quiniela\bin\Microsoft.Owin.Security.Twitter.xml
 Z:\Users\InternetPower\QuinielaGol\Quiniela\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-Z:\Users\InternetPower\QuinielaGol\Quiniela\obj\Debug\Quiniela.csprojResolveAssemblyReference.cache
 Z:\Users\InternetPower\QuinielaGol\Quiniela\obj\Debug\Quiniela.dll
 Z:\Users\InternetPower\QuinielaGol\Quiniela\obj\Debug\Quiniela.pdb
-C:\Users\Charles\Documents\Develop\Visual Studio Projects\QuinielaGol\Quiniela\bin\ClosedXML.dll
-C:\Users\Charles\Documents\Develop\Visual Studio Projects\QuinielaGol\Quiniela\bin\DocumentFormat.OpenXml.dll
-C:\Users\Charles\Documents\Develop\Visual Studio Projects\QuinielaGol\Quiniela\bin\ExcelNumberFormat.dll
-C:\Users\Charles\Documents\Develop\Visual Studio Projects\QuinielaGol\Quiniela\bin\FastMember.Signed.dll
-C:\Users\Charles\Documents\Develop\Visual Studio Projects\QuinielaGol\Quiniela\bin\ClosedXML.pdb
-C:\Users\Charles\Documents\Develop\Visual Studio Projects\QuinielaGol\Quiniela\bin\ClosedXML.xml
-C:\Users\Charles\Documents\Develop\Visual Studio Projects\QuinielaGol\Quiniela\bin\DocumentFormat.OpenXml.xml
-C:\Users\Charles\Documents\Develop\Visual Studio Projects\QuinielaGol\Quiniela\bin\ExcelNumberFormat.xml
+Z:\Users\InternetPower\QuinielaGol\Quiniela\obj\Debug\Quiniela.csprojResolveAssemblyReference.cache

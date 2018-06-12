@@ -13,7 +13,7 @@ using Microsoft.AspNet.Identity;
 
 namespace Quiniela.Controllers
 {
-    [Authorize]
+    
     public class HomeController : Controller
     {
 
@@ -26,6 +26,10 @@ namespace Quiniela.Controllers
             int nearDay = db.Match.Where(x => x.Status == 0).FirstOrDefault().Date.Value.Day;
 
             List<Match> nextMatches = db.Match.Where(x => x.Date.Value.Day == nearDay).ToList<Match>();
+            foreach (Match m in nextMatches)
+            {
+                m.Date = m.Date.Value.AddHours(-6);
+            }
             //List<Match> nextMatches = db.Match.ToList<Match>();
 
             //List<Prediction> usersPredictions = db.Prediction.ToList<Prediction>();
@@ -38,7 +42,8 @@ namespace Quiniela.Controllers
 
             return View(model);
         }
-        
+
+        [Authorize]
         public ActionResult Prediction()
         {
             QuinielaGolEntities db = new QuinielaGolEntities();
@@ -139,42 +144,43 @@ namespace Quiniela.Controllers
         }
 
         // Excel Area -----------------------------------------------------------------------------------
-
-        public void downloadPredictions()
+        
+        public ActionResult downloadPredictions()
         {
             QuinielaGolEntities db = new QuinielaGolEntities();
             var wb = new XLWorkbook();
             List<Prediction> predList = db.Prediction.ToList();
             List<string> already = new List<string>();
+            System.IO.Stream spreadsheetStream = new System.IO.MemoryStream();
 
             if (predList.Count > 0)
             {
                 int i = 4;
-                foreach (var item in predList) {
-
+                foreach (var item in predList)
+                {
                     string usrName = item.AspNetUsers.UserName;
-                    if(!already.Contains(usrName)){
+                    
+                    if (!already.Contains(usrName))
+                    {
                         i = 4;
                         already.Add(usrName);
-                        wb.Worksheets.Add(usrName);
+                        wb.AddWorksheet(usrName);
                         wb.Worksheet(usrName).Cell("B2").Value = usrName;
-                        wb.Worksheet(usrName).Cell("B3").Value = "Fecha";
-                        wb.Worksheet(usrName).Cell("C3").Value = "Local";
-                        wb.Worksheet(usrName).Cell("D3").Value = "GL";
-                        wb.Worksheet(usrName).Cell("E3").Value = "GV";
-                        wb.Worksheet(usrName).Cell("F3").Value = "Visitante";
+                        wb.Worksheet(usrName).Cell("B3").Value = "Local";
+                        wb.Worksheet(usrName).Cell("C3").Value = "GL";
+                        wb.Worksheet(usrName).Cell("D3").Value = "GV";
+                        wb.Worksheet(usrName).Cell("E3").Value = "Visitante";
 
                         //Sheet Styles
                         //Ranges
-                        var rngTable = wb.Worksheet(usrName).Range("B2:F51");
-                        var rngTitle = wb.Worksheet(usrName).Range("B2:F2");
+                        var rngTable = wb.Worksheet(usrName).Range("B2:E51");
+                        var rngTitle = wb.Worksheet(usrName).Range("B2:E2");
                         var rngDates = rngTable.Range("D3:D5"); // The address is relative to rngTable (NOT the worksheet)
-                        var rngNumbers = rngTable.Range("E3:E5"); // The address is relative to rngTable (NOT the worksheet)
-                        var rngHeaders = rngTable.Range("A2:E2"); // The address is relative to rngTable (NOT the worksheet)
+                        var rngHeaders = rngTable.Range("A2:D2"); // The address is relative to rngTable (NOT the worksheet)
 
                         rngHeaders.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
                         rngHeaders.Style.Font.Bold = true;
-                        
+
                         //wb.Worksheet(usrName).Columns(1,5).AdjustToContents();
                         rngTable.Style.Font.FontName = "Arial";
                         rngTable.Style.Font.FontSize = 12;
@@ -182,49 +188,39 @@ namespace Quiniela.Controllers
                         rngHeaders.Style.Font.FontColor = XLColor.White;
                         rngHeaders.Style.Fill.BackgroundColor = XLColor.Gray;
 
-
-                        rngTable.Style.Border.BottomBorder = XLBorderStyleValues.Thin;
-
                         rngTable.Cell(1, 1).Style.Font.Bold = true;
                         rngHeaders.Style.Font.FontSize = 16;
                         rngTitle.Style.Font.FontColor = XLColor.White;
                         rngTable.Cell(1, 1).Style.Fill.BackgroundColor = XLColor.SteelBlue;
-                        rngTable.Cell(1, 1).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+                        rngTable.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
 
                         rngTable.Row(1).Merge(); // We could've also used: rngTable.Range("A1:E1").Merge()
 
                         //Add a thick outside border
                         rngTable.Style.Border.OutsideBorder = XLBorderStyleValues.Thick;
-
-                        // You can also specify the border for each side with:
-                        // rngTable.FirstColumn().Style.Border.LeftBorder = XLBorderStyleValues.Thick;
-                        // rngTable.LastColumn().Style.Border.RightBorder = XLBorderStyleValues.Thick;
-                        // rngTable.FirstRow().Style.Border.TopBorder = XLBorderStyleValues.Thick;
-                        // rngTable.LastRow().Style.Border.BottomBorder = XLBorderStyleValues.Thick;
-
-                        //Adjust column widths to their content
-                        wb.Worksheet(usrName).Columns(2, 51).AdjustToContents();
+                        
                     }
-                    wb.Worksheet(usrName).Cell("B"+i).Value = item.Match.Date;
-                    wb.Worksheet(usrName).Cell("C" + i).Value = item.Match.Local;
-                    wb.Worksheet(usrName).Cell("D" + i).Value = item.LocalGoals;
-                    wb.Worksheet(usrName).Cell("E" + i).Value = item.VisitorGoals;
-                    wb.Worksheet(usrName).Cell("F" + i).Value = item.Match.Visitor;
+                    wb.Worksheet(usrName).Cell("B" + i).Value = item.Match.Local;
+                    wb.Worksheet(usrName).Cell("C" + i).Value = item.LocalGoals;
+                    wb.Worksheet(usrName).Cell("D" + i).Value = item.VisitorGoals;
+                    wb.Worksheet(usrName).Cell("E" + i).Value = item.Match.Visitor;
                     i++;
                 }
-                
-                string folderPath = "C:\\Uni-Quiniela\\";
-                if (!Directory.Exists(folderPath))
-                {
-                    Directory.CreateDirectory(folderPath);
+                //Adjust the colums sizes
+                foreach (var item in already) {
+                    var ws = wb.Worksheet(item);
+                    ws.Column(1).AdjustToContents();
+                    ws.Column(2).AdjustToContents();
+                    ws.Column(5).AdjustToContents();
                 }
-
-                try { wb.SaveAs(folderPath + "UQ_Results_All.xlsx"); } catch (Exception e) { }
                 
+                wb.SaveAs(spreadsheetStream);
+                spreadsheetStream.Position = 0;
             }
-            Response.Redirect("/");
+            else {
+                Response.Redirect("/Home/Index");
+            }
+            return new FileStreamResult(spreadsheetStream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") { FileDownloadName = "UQ_Results_All.xlsx" };
         }
-
-
     }
 }

@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QuinielaGolModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Prediction">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MatchId" Type="Int32" Nullable="false" />
+    <Property Name="LocalGoals" Type="Int32" Nullable="false" />
+    <Property Name="VisitorGoals" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Match" Relationship="QuinielaGolModel.FK_Prediction_Match" FromRole="Prediction" ToRole="Match" />
+    <NavigationProperty Name="AspNetUsers" Relationship="QuinielaGolModel.FK_Prediction_AspNetUsers" FromRole="Prediction" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="Ranking">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="UserName" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Points" Type="Int32" />
+  </EntityType>
+  <EntityContainer Name="QuinielaGolEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Prediction" EntityType="Self.Prediction" />
+    <EntitySet Name="Ranking" EntityType="Self.Ranking" />
+    <EntitySet Name="Match" EntityType="QuinielaGolModel.Match" />
+    <AssociationSet Name="FK_Prediction_Match" Association="QuinielaGolModel.FK_Prediction_Match">
+      <End Role="Match" EntitySet="Match" />
+      <End Role="Prediction" EntitySet="Prediction" />
+    </AssociationSet>
+    <EntitySet Name="AspNetUsers" EntityType="QuinielaGolModel.AspNetUsers" />
+    <AssociationSet Name="FK_Prediction_AspNetUsers" Association="QuinielaGolModel.FK_Prediction_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Prediction" EntitySet="Prediction" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Match">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Date" Type="DateTime" Precision="0" />
+    <Property Name="Local" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Visitor" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LocalGoals" Type="Int32" Nullable="false" />
+    <Property Name="VisitorGoals" Type="Int32" Nullable="false" />
+    <Property Name="Status" Type="Byte" Nullable="false" />
+    <NavigationProperty Name="Prediction" Relationship="QuinielaGolModel.FK_Prediction_Match" FromRole="Match" ToRole="Prediction" />
+  </EntityType>
+  <Association Name="FK_Prediction_Match">
+    <End Type="QuinielaGolModel.Match" Role="Match" Multiplicity="1" />
+    <End Type="QuinielaGolModel.Prediction" Role="Prediction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Match">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Prediction">
+        <PropertyRef Name="MatchId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="AspNetUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+    <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Prediction" Relationship="QuinielaGolModel.FK_Prediction_AspNetUsers" FromRole="AspNetUsers" ToRole="Prediction" />
+  </EntityType>
+  <Association Name="FK_Prediction_AspNetUsers">
+    <End Type="QuinielaGolModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+    <End Type="QuinielaGolModel.Prediction" Role="Prediction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Prediction">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
