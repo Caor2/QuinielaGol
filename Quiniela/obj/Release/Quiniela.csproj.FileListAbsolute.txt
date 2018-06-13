@@ -87,3 +87,4 @@ Z:\Users\InternetPower\QuinielaGol\Quiniela\bin\Microsoft.Owin.Security.Twitter.
 Z:\Users\InternetPower\QuinielaGol\Quiniela\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 Z:\Users\InternetPower\QuinielaGol\Quiniela\obj\Release\Quiniela.dll
 Z:\Users\InternetPower\QuinielaGol\Quiniela\obj\Release\Quiniela.pdb
+Z:\Users\InternetPower\QuinielaGol\Quiniela\obj\Release\Quiniela.csprojResolveAssemblyReference.cache

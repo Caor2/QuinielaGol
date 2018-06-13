@@ -12,10 +12,10 @@
         <h1>Predicciones de @Model.Select(x => x.AspNetUsers).FirstOrDefault().UserName </h1>
         <table id="predictionsTable" class="table table-bordered table-striped">
             <tr class="text-center">
-                <th>Equipo Local</th>
-                <th>GL</th>
-                <th>GV</th>
-                <th>Equipo Visitante</th>
+                <th class="text-center">Equipo Local</th>
+                <th class="text-center">GL</th>
+                <th class="text-center">GV</th>
+                <th class="text-center">Equipo Visitante</th>
             </tr>
             
             @foreach (var item in Model)

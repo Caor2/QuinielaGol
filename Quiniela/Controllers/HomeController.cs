@@ -23,20 +23,25 @@ namespace Quiniela.Controllers
 
             //update Matches States Here
 
-            int nearDay = db.Match.Where(x => x.Status == 0).FirstOrDefault().Date.Value.Day;
-
+            //Status 0:toBePlayed 1:onProcess 2:Finished
+            int nearDay = db.Match.Where(x => x.Status == 0 && x.Date.Value.Day != DateTime.Today.Day).FirstOrDefault().Date.Value.Day;
             List<Match> nextMatches = db.Match.Where(x => x.Date.Value.Day == nearDay).ToList<Match>();
             foreach (Match m in nextMatches)
             {
                 m.Date = m.Date.Value.AddHours(-6);
             }
-            //List<Match> nextMatches = db.Match.ToList<Match>();
+
+            List<Match> todayMatches = db.Match.Where(x => x.Date.Value.Day == DateTime.Today.Day).ToList<Match>();
+            foreach (Match match in todayMatches)
+            {
+                match.Date = match.Date.Value.AddHours(-6);
+            }
 
             //List<Prediction> usersPredictions = db.Prediction.ToList<Prediction>();
             List<Ranking> usersRank = db.Ranking.ToList<Ranking>();
 
             indexModels model = new indexModels();
-            model.matches = nextMatches;
+            model.matches = todayMatches;
             //model.predictions = usersPredictions;
             model.ranking = usersRank.OrderByDescending(o => o.Points).ToList();
 
