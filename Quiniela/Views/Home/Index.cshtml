@@ -4,47 +4,73 @@
     ViewBag.Title = "UNI-Quiniela";
 }
 
+<style>
+
+    a.prox {
+        color: cornflowerblue;
+    }
+
+    a.active {
+        color: darkgreen;
+    }
+
+    a.finish {
+        color: darkred;
+    }
+
+    img.teamFlag {
+        height: 15px;
+        width: 20px;
+        margin-left: 10px;
+        margin-right: 10px;
+        border: 2px solid;
+    }
+
+</style>
+
 <div class="jumbotron text-center">
     
     @if (Model.matches.Count > 0)
     {
         <h1>Partidos de hoy.</h1>
-        <table id="nextTable" class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th class="text-center">Fecha</th>
-                    <th class="text-center">Local</th>
-                    <th class="text-center">GL</th>
-                    <th></th>
-                    <th class="text-center">GV</th>
-                    <th class="text-center">Visitante</th>
-                    <th class="text-center">Estado</th>
-                </tr>
-            </thead>
-            @foreach (var item in Model.matches)
+        <div class="table-responsive">
+            <table id="nextTable" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th class="text-center">Fecha</th>
+                        <th class="text-center">Local</th>
+                        <th class="text-center">GL</th>
+                        <th></th>
+                        <th class="text-center">GV</th>
+                        <th class="text-center">Visitante</th>
+                        <th class="text-center">Estado</th>
+                    </tr>
+                </thead>
+                @foreach (var item in Model.matches)
             {
             <tr>
-                <td>@item.Date</td>
-                <td>@item.Local</td>
+                <td>@item.Date.Value.ToString("dd/MM hh:mm")</td>
+                <td><img class="teamFlag" src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Flag_of_Spain.svg">@item.Local</td>
                 <td>@item.LocalGoals</td>
                 <td>VS</td>
                 <td>@item.VisitorGoals</td>
-                <td>@item.Visitor</td>
+                <td>@item.Visitor<img class="teamFlag" src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Flag_of_Spain.svg"></td>
                 @switch (@item.Status)
                 {
                     case 0:
-                        <td style="color: cornflowerblue">Próximo</td>
+                <td>@Html.ActionLink("Próximo", "FilteredPredicts", new { searchFor = item.Id }, new { @class = "prox" })</td>
                         break;
                     case 1:
-                        <td style="color: green">En emisión</td>
+                <td>@Html.ActionLink("En emisión", "FilteredPredicts", new { searchFor = item.Id }, new { @class = "active" })</td>
                         break;
                     case 2:
-                        <td style="color: indianred">Finalizado</td>
+                <td>@Html.ActionLink("Finalizado", "FilteredPredicts", new { searchFor = item.Id }, new { @class = "finish" })</td>
                         break;
                 }
             </tr>
             }
-        </table>
+            </table>
+        </div>
     }
     else {
             <h1>No hay partidos para hoy.</h1>
