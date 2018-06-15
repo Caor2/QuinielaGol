@@ -13,25 +13,56 @@ using Microsoft.AspNet.Identity;
 
 namespace Quiniela.Controllers
 {
-    
+
     public class HomeController : Controller
     {
+        private QuinielaGolEntities db = new QuinielaGolEntities();
+
+
+        public void UpdateMatchEstatus() {
+            List<Match> todayMatches = db.Match.Where(x => x.Date.Value.Day == DateTime.Today.Day).ToList<Match>();
+
+            DateTime timeRightNow = DateTime.Now;
+            DateTime endOfTheMatch, startOfTheMatch;
+            
+            //update Matches States:
+            //Status 0:toBePlayed
+            //Status 1:onProcess
+            //Status 2:Finished
+            
+            if (todayMatches.Count > 0)
+            {
+                foreach (Match m in todayMatches)
+                {
+                    endOfTheMatch = m.Date.Value.AddHours(-4);
+                    startOfTheMatch = m.Date.Value.AddHours(-6);
+                    if ( m.Status != 2) {
+                        if (timeRightNow > endOfTheMatch) {
+                            m.Status = 2;
+                        }
+                        else if (timeRightNow > startOfTheMatch)
+                        {
+                            m.Status = 1;
+                        }
+                        db.Entry(m).State = System.Data.Entity.EntityState.Modified;
+                        db.SaveChanges();
+                    }
+                }
+            }
+        }
 
         public ActionResult Index()
         {
-            QuinielaGolEntities db = new QuinielaGolEntities();
-
-            //update Matches States Here
-
-            //Status 0:toBePlayed 1:onProcess 2:Finished
+            UpdateMatchEstatus();
+            List<Match> todayMatches = db.Match.Where(x => x.Date.Value.Day == DateTime.Today.Day).ToList<Match>();
+            
             int nearDay = db.Match.Where(x => x.Status == 0 && x.Date.Value.Day != DateTime.Today.Day).FirstOrDefault().Date.Value.Day;
             List<Match> nextMatches = db.Match.Where(x => x.Date.Value.Day == nearDay).ToList<Match>();
             foreach (Match m in nextMatches)
             {
                 m.Date = m.Date.Value.AddHours(-6);
             }
-
-            List<Match> todayMatches = db.Match.Where(x => x.Date.Value.Day == DateTime.Today.Day).ToList<Match>();
+            
             foreach (Match match in todayMatches)
             {
                 match.Date = match.Date.Value.AddHours(-6);
@@ -51,83 +82,87 @@ namespace Quiniela.Controllers
         [Authorize]
         public ActionResult Prediction()
         {
-            QuinielaGolEntities db = new QuinielaGolEntities();
             string _user = User.Identity.GetUserId();
+            List<Prediction> userPredicts = db.Prediction.Where(x => x.UserId == _user).ToList();
 
-            List<Prediction> userPredicts = db.Prediction.Where(x => x.UserId == _user).ToList<Prediction>();
+            DateTime limitDay = (db.Match.FirstOrDefault().Date.Value).AddHours(-6);
+            DateTime todayIs = DateTime.Now;
+            PredictionModels model = new PredictionModels();
 
-            return View(userPredicts);
+            if (todayIs >= limitDay) {
+                model.allowUpload = false;
+            }
+            else {
+                model.allowUpload = true;
+            }
+
+            model.userPredicts = userPredicts;
+
+            return View(model);
         }
 
         public JsonResult UploadFile()
         {
             string UserId = User.Identity.GetUserId();
-            QuinielaGolEntities db = new QuinielaGolEntities();
             bool alreadyUploaded = db.Prediction.Select(x => x.UserId).Contains(UserId);
-            DateTime limitDay = db.Match.FirstOrDefault().Date.Value;
+            DateTime limitDay = (db.Match.FirstOrDefault().Date.Value).AddHours(-6);
+            DateTime todayIs = DateTime.Now;
 
-            if (DateTime.Today >= limitDay)
+            if (Request.Files.Count > 0 && todayIs < limitDay)
             {
-                return Json(new { status = "Se alcanzó la fecha límite." }, JsonRequestBehavior.AllowGet);
-            }
-            else
-            {
-                if (alreadyUploaded)
+                try
                 {
-                    var toDelete = db.Prediction.Where(x => x.UserId == UserId).ToList<Prediction>();
-                    db.Prediction.RemoveRange(toDelete);
-                }
-                if (Request.Files.Count > 0)
-                {
-                    try
+                    List<Prediction> predicts = new List<Prediction>();
+                    HttpFileCollectionBase file = Request.Files;
+                    if ((file != null) && (file.Count > 0))
                     {
-                        List<Prediction> predictions = new List<Prediction>();
-                        HttpFileCollectionBase file = Request.Files;
-                        if ((file != null) && (file.Count > 0))
+                        if (alreadyUploaded)
                         {
-                            //string fileName = file.FileName;
-                            //string fileContentType = file.ContentType;
-                            byte[] fileBytes = new byte[Request.ContentLength];
-                            var data = Request.InputStream.Read(fileBytes, 0, Convert.ToInt32(Request.ContentLength));
-                            // var usersList = new List<Users>();
-                            //using (var package = new ExcelPackage())
-                            var package = new ExcelPackage(Request.InputStream);
-                            ExcelWorksheet workSheet = package.Workbook.Worksheets.FirstOrDefault();
-
-                            var cells = workSheet.Cells;
-
-                            for (int i = 2; i <= 49; i++)
-                            {
-                                Prediction predict = new Prediction()
-                                {
-                                    MatchId = i - 1,
-                                    UserId = User.Identity.GetUserId(),
-                                    LocalGoals = int.Parse(cells["B" + i].Text),
-                                    VisitorGoals = int.Parse(cells["C" + i].Text)
-                                };
-
-                                predictions.Add(predict);
-                            }
-                            db.Prediction.AddRange(predictions);
-                            db.SaveChanges();
-                            Response.Redirect("/Home/Prediction");
+                            var toDelete = db.Prediction.Where(x => x.UserId == UserId).ToList<Prediction>();
+                            db.Prediction.RemoveRange(toDelete);
                         }
-                        return Json(new { status = "OK" }, JsonRequestBehavior.AllowGet);
-                    }
-                    catch (Exception ex)
-                    {
-                        return Json(new { status = "Error en formato" }, JsonRequestBehavior.AllowGet);
-                    }
+                        //string fileName = file.FileName;
+                        //string fileContentType = file.ContentType;
+                        byte[] fileBytes = new byte[Request.ContentLength];
+                        var data = Request.InputStream.Read(fileBytes, 0, Convert.ToInt32(Request.ContentLength));
+                        // var usersList = new List<Users>();
+                        //using (var package = new ExcelPackage())
+                        var package = new ExcelPackage(Request.InputStream);
+                        ExcelWorksheet workSheet = package.Workbook.Worksheets.FirstOrDefault();
 
+                        var cells = workSheet.Cells;
+
+                        for (int i = 2; i <= 49; i++)
+                        {
+                            Prediction predict = new Prediction()
+                            {
+                                MatchId = i - 1,
+                                UserId = User.Identity.GetUserId(),
+                                LocalGoals = int.Parse(cells["B" + i].Text),
+                                VisitorGoals = int.Parse(cells["C" + i].Text)
+                            };
+
+                            predicts.Add(predict);
+                        }
+                        
+                        db.Prediction.AddRange(predicts);
+                        db.SaveChanges();
+                        Response.Redirect("/Home/Prediction");
+
+                    }
+                    return Json(new { status = "OK" }, JsonRequestBehavior.AllowGet);
                 }
-            }
+                catch (Exception ex)
+                {
+                    return Json(new { status = "Error en formato" }, JsonRequestBehavior.AllowGet);
+                }
 
+            }
             return Json("No se ha cargado ningun archivo.", JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Matches()
         {
-            QuinielaGolEntities db = new QuinielaGolEntities();
             List<Match> matches = new List<Match>();
             matches = db.Match.ToList<Match>();
 
@@ -141,7 +176,6 @@ namespace Quiniela.Controllers
 
         public ActionResult AnotherPredicts(string searching)
         {
-            QuinielaGolEntities db = new QuinielaGolEntities();
 
             List<Prediction> otherPredicts = db.Prediction.Where(x => x.UserId == searching).ToList();
 
@@ -149,10 +183,9 @@ namespace Quiniela.Controllers
         }
 
         // Excel Area -----------------------------------------------------------------------------------
-        
+
         public ActionResult downloadPredictions()
         {
-            QuinielaGolEntities db = new QuinielaGolEntities();
             var wb = new XLWorkbook();
             List<Prediction> predList = db.Prediction.ToList();
             List<string> already = new List<string>();
@@ -164,7 +197,7 @@ namespace Quiniela.Controllers
                 foreach (var item in predList)
                 {
                     string usrName = item.AspNetUsers.UserName;
-                    
+
                     if (!already.Contains(usrName))
                     {
                         i = 4;
@@ -203,7 +236,7 @@ namespace Quiniela.Controllers
 
                         //Add a thick outside border
                         rngTable.Style.Border.OutsideBorder = XLBorderStyleValues.Thick;
-                        
+
                     }
                     wb.Worksheet(usrName).Cell("B" + i).Value = item.Match.Local;
                     wb.Worksheet(usrName).Cell("C" + i).Value = item.LocalGoals;
@@ -212,13 +245,14 @@ namespace Quiniela.Controllers
                     i++;
                 }
                 //Adjust the colums sizes
-                foreach (var item in already) {
+                foreach (var item in already)
+                {
                     var ws = wb.Worksheet(item);
                     ws.Column(1).AdjustToContents();
                     ws.Column(2).AdjustToContents();
                     ws.Column(5).AdjustToContents();
                 }
-                
+
                 wb.SaveAs(spreadsheetStream);
                 spreadsheetStream.Position = 0;
             }

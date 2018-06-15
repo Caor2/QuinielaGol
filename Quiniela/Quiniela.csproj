@@ -232,6 +232,7 @@
     <Compile Include="Models\Prediction.cs">
       <DependentUpon>QuinielaGolEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PredictionModels.cs" />
     <Compile Include="Models\QuinielaGolEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
