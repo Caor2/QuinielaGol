@@ -176,10 +176,14 @@ namespace Quiniela.Controllers
 
         public ActionResult AnotherPredicts(string searching)
         {
-
             List<Prediction> otherPredicts = db.Prediction.Where(x => x.UserId == searching).ToList();
-
             return View(otherPredicts);
+        }
+
+        public ActionResult FilteredPredicts(int searchFor)
+        {
+            List<Prediction> predictsForMatch = db.Prediction.Where(x => x.MatchId == searchFor).ToList();
+            return View(predictsForMatch);
         }
 
         // Excel Area -----------------------------------------------------------------------------------

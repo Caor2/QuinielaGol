@@ -1,0 +1,37 @@
+﻿@model List<Quiniela.Models.Prediction>
+
+@{
+    ViewBag.Title = "Predicciones por partido.";
+}
+
+<h2>Predicciones por partido.</h2>
+
+<div class="jumbotron text-center">
+    @if (Model.LongCount() > 0)
+    {
+        <h1>Predicciones:</h1>
+        <h2>@Model.FirstOrDefault().Match.Local VS @Model.FirstOrDefault().Match.Visitor</h2>
+        <table id="predictionsTable" class="table table-bordered table-striped">
+            <tr class="text-center">
+                <th class="text-center">Usuario</th>
+                <th class="text-center">Equipo Local</th>
+                <th class="text-center">GL</th>
+                <th class="text-center">GV</th>
+                <th class="text-center">Equipo Visitante</th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>@Html.ActionLink(@item.AspNetUsers.UserName, "AnotherPredicts", new { searching = @item.UserId })</td>
+                <td>@item.Match.Local</td>
+                <td>@item.LocalGoals</td>
+                <td>@item.VisitorGoals   </td>
+                <td>@item.Match.Visitor</td>
+            </tr>
+            }
+        </table>
+    }
+    else
+    { <h1>No hay predicciones.</h1>}
+</div>

@@ -6,7 +6,7 @@
 
 <div class="jumbotron text-center">
     
-    @if (Model.matches.LongCount() > 0)
+    @if (Model.matches.Count > 0)
     {
         <h1>Partidos de hoy.</h1>
         <table id="nextTable" class="table table-bordered table-striped">
@@ -54,7 +54,7 @@
 
 <div class="jumbotron text-center">
 
-    @if (Model.ranking.LongCount() > 0)
+    @if (Model.ranking.Count > 0)
     {
         <h1>Ranking.</h1>
         <table id="rankingTable" class="table table-bordered table-striped">
@@ -71,8 +71,8 @@
                 int count = i + 1;
                 <tr>
                     <td>@count</td>
-                    <td>@Html.ActionLink(Model.ranking.ElementAt(i).UserName, "AnotherPredicts", new { searching = Model.ranking.ElementAt(i).Id })</td>
-                    <td>@Model.ranking.ElementAt(i).Points</td>
+                    <td>@Html.ActionLink(Model.ranking[i].UserName, "AnotherPredicts", new { searching = Model.ranking[i].Id })</td>
+                    <td>@Model.ranking[i].Points</td>
                 </tr>
             }
             @*@foreach (var item in Model.ranking)

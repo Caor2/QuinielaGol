@@ -6,248 +6,257 @@ by editing this MSBuild file. In order to learn more about this please visit htt
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <_PublishTargetUrl>Z:\Users\InternetPower\UNI-Quiniela</_PublishTargetUrl>
+    <_PublishTargetUrl>C:\Users\Charles\Desktop\UNI-Quiniela[V1.5.3]</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="ApplicationInsights.config">
-      <publishTime>06/07/2018 13:17:30</publishTime>
+      <publishTime>06/14/2018 23:22:29</publishTime>
     </File>
     <File Include="bin/Antlr3.Runtime.dll">
-      <publishTime>06/07/2018 13:16:44</publishTime>
+      <publishTime>06/14/2018 23:22:31</publishTime>
+    </File>
+    <File Include="bin/Antlr3.Runtime.pdb">
+      <publishTime>06/14/2018 23:22:31</publishTime>
     </File>
     <File Include="bin/ApplicationInsights.config">
-      <publishTime>06/07/2018 13:17:30</publishTime>
+      <publishTime>06/14/2018 23:22:29</publishTime>
     </File>
     <File Include="bin/ClosedXML.dll">
-      <publishTime>06/12/2018 08:16:34</publishTime>
+      <publishTime>06/14/2018 23:22:31</publishTime>
+    </File>
+    <File Include="bin/ClosedXML.pdb">
+      <publishTime>06/14/2018 23:22:31</publishTime>
     </File>
     <File Include="bin/DocumentFormat.OpenXml.dll">
-      <publishTime>06/12/2018 08:16:34</publishTime>
+      <publishTime>06/14/2018 23:22:31</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
-      <publishTime>06/07/2018 13:16:49</publishTime>
+      <publishTime>06/14/2018 23:22:33</publishTime>
     </File>
     <File Include="bin/EntityFramework.SqlServer.dll">
-      <publishTime>06/07/2018 13:16:49</publishTime>
+      <publishTime>06/14/2018 23:22:33</publishTime>
     </File>
     <File Include="bin/EPPlus.dll">
-      <publishTime>06/08/2018 09:32:09</publishTime>
+      <publishTime>06/14/2018 23:22:29</publishTime>
     </File>
     <File Include="bin/ExcelNumberFormat.dll">
-      <publishTime>06/12/2018 08:16:36</publishTime>
+      <publishTime>06/14/2018 23:22:34</publishTime>
     </File>
     <File Include="bin/FastMember.Signed.dll">
-      <publishTime>06/12/2018 08:16:36</publishTime>
+      <publishTime>06/14/2018 23:22:34</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.Agent.Intercept.dll">
-      <publishTime>06/07/2018 13:17:08</publishTime>
+      <publishTime>06/14/2018 23:22:34</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.DependencyCollector.dll">
-      <publishTime>06/07/2018 13:17:10</publishTime>
+      <publishTime>06/14/2018 23:22:34</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.PerfCounterCollector.dll">
-      <publishTime>06/07/2018 13:17:14</publishTime>
+      <publishTime>06/14/2018 23:22:35</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.ServerTelemetryChannel.dll">
-      <publishTime>06/07/2018 13:17:17</publishTime>
+      <publishTime>06/14/2018 23:22:35</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.Web.dll">
-      <publishTime>06/07/2018 13:17:28</publishTime>
+      <publishTime>06/14/2018 23:22:35</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.WindowsServer.dll">
-      <publishTime>06/07/2018 13:17:23</publishTime>
+      <publishTime>06/14/2018 23:22:35</publishTime>
     </File>
     <File Include="bin/Microsoft.ApplicationInsights.dll">
-      <publishTime>06/07/2018 13:17:05</publishTime>
+      <publishTime>06/14/2018 23:22:34</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.Identity.Core.dll">
-      <publishTime>06/07/2018 13:16:51</publishTime>
+      <publishTime>06/14/2018 23:22:35</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.Identity.EntityFramework.dll">
-      <publishTime>06/07/2018 13:16:52</publishTime>
+      <publishTime>06/14/2018 23:22:36</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.Identity.Owin.dll">
-      <publishTime>06/07/2018 13:16:52</publishTime>
+      <publishTime>06/14/2018 23:22:36</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
-      <publishTime>06/07/2018 13:16:59</publishTime>
+      <publishTime>06/14/2018 23:22:36</publishTime>
     </File>
     <File Include="bin/Microsoft.Owin.dll">
-      <publishTime>06/07/2018 13:16:52</publishTime>
+      <publishTime>06/14/2018 23:22:36</publishTime>
     </File>
     <File Include="bin/Microsoft.Owin.Host.SystemWeb.dll">
-      <publishTime>06/07/2018 13:16:53</publishTime>
+      <publishTime>06/14/2018 23:22:36</publishTime>
     </File>
     <File Include="bin/Microsoft.Owin.Security.Cookies.dll">
-      <publishTime>06/07/2018 13:16:54</publishTime>
+      <publishTime>06/14/2018 23:22:36</publishTime>
     </File>
     <File Include="bin/Microsoft.Owin.Security.dll">
-      <publishTime>06/07/2018 13:16:53</publishTime>
+      <publishTime>06/14/2018 23:22:36</publishTime>
     </File>
     <File Include="bin/Microsoft.Owin.Security.Facebook.dll">
-      <publishTime>06/07/2018 13:16:53</publishTime>
+      <publishTime>06/14/2018 23:22:36</publishTime>
     </File>
     <File Include="bin/Microsoft.Owin.Security.Google.dll">
-      <publishTime>06/07/2018 13:16:54</publishTime>
+      <publishTime>06/14/2018 23:22:37</publishTime>
     </File>
     <File Include="bin/Microsoft.Owin.Security.MicrosoftAccount.dll">
-      <publishTime>06/07/2018 13:16:55</publishTime>
+      <publishTime>06/14/2018 23:22:37</publishTime>
     </File>
     <File Include="bin/Microsoft.Owin.Security.OAuth.dll">
-      <publishTime>06/07/2018 13:16:54</publishTime>
+      <publishTime>06/14/2018 23:22:37</publishTime>
     </File>
     <File Include="bin/Microsoft.Owin.Security.Twitter.dll">
-      <publishTime>06/07/2018 13:16:55</publishTime>
+      <publishTime>06/14/2018 23:22:37</publishTime>
     </File>
     <File Include="bin/Microsoft.Web.Infrastructure.dll">
-      <publishTime>06/07/2018 13:16:43</publishTime>
+      <publishTime>06/14/2018 23:22:37</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
-      <publishTime>06/07/2018 13:16:47</publishTime>
+      <publishTime>06/14/2018 23:22:37</publishTime>
     </File>
     <File Include="bin/Owin.dll">
-      <publishTime>06/07/2018 13:16:52</publishTime>
+      <publishTime>06/14/2018 23:22:38</publishTime>
     </File>
     <File Include="bin/Quiniela.dll">
-      <publishTime>06/13/2018 13:15:28</publishTime>
+      <publishTime>06/15/2018 02:54:13</publishTime>
+    </File>
+    <File Include="bin/Quiniela.pdb">
+      <publishTime>06/15/2018 02:54:13</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe">
-      <publishTime>06/07/2018 13:16:58</publishTime>
+      <publishTime>06/14/2018 23:22:36</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.Build.Tasks.CodeAnalysis.dll">
-      <publishTime>06/07/2018 13:16:58</publishTime>
+      <publishTime>06/14/2018 23:22:36</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.CodeAnalysis.CSharp.dll">
-      <publishTime>06/07/2018 13:16:58</publishTime>
+      <publishTime>06/14/2018 23:22:36</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.CodeAnalysis.dll">
-      <publishTime>06/07/2018 13:16:58</publishTime>
+      <publishTime>06/14/2018 23:22:36</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.CodeAnalysis.VisualBasic.dll">
-      <publishTime>06/07/2018 13:16:58</publishTime>
+      <publishTime>06/14/2018 23:22:36</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.CSharp.Core.targets">
-      <publishTime>06/07/2018 13:16:58</publishTime>
+      <publishTime>06/14/2018 23:22:36</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.VisualBasic.Core.targets">
-      <publishTime>06/07/2018 13:16:58</publishTime>
+      <publishTime>06/14/2018 23:22:36</publishTime>
     </File>
     <File Include="bin/roslyn/System.Collections.Immutable.dll">
-      <publishTime>06/07/2018 13:16:58</publishTime>
+      <publishTime>06/14/2018 23:22:36</publishTime>
     </File>
     <File Include="bin/roslyn/System.Reflection.Metadata.dll">
-      <publishTime>06/07/2018 13:16:58</publishTime>
+      <publishTime>06/14/2018 23:22:36</publishTime>
     </File>
     <File Include="bin/roslyn/vbc.exe">
-      <publishTime>06/07/2018 13:16:58</publishTime>
+      <publishTime>06/14/2018 23:22:36</publishTime>
     </File>
     <File Include="bin/roslyn/VBCSCompiler.exe">
-      <publishTime>06/07/2018 13:16:58</publishTime>
+      <publishTime>06/14/2018 23:22:36</publishTime>
     </File>
     <File Include="bin/roslyn/VBCSCompiler.exe.config">
-      <publishTime>06/07/2018 13:16:58</publishTime>
+      <publishTime>06/14/2018 23:22:36</publishTime>
     </File>
     <File Include="bin/System.Web.Helpers.dll">
-      <publishTime>06/07/2018 13:16:42</publishTime>
+      <publishTime>06/14/2018 23:22:36</publishTime>
     </File>
     <File Include="bin/System.Web.Mvc.dll">
-      <publishTime>06/07/2018 13:16:43</publishTime>
+      <publishTime>06/14/2018 23:22:36</publishTime>
     </File>
     <File Include="bin/System.Web.Optimization.dll">
-      <publishTime>06/07/2018 13:16:42</publishTime>
+      <publishTime>06/14/2018 23:22:36</publishTime>
     </File>
     <File Include="bin/System.Web.Razor.dll">
-      <publishTime>06/07/2018 13:16:41</publishTime>
+      <publishTime>06/14/2018 23:22:36</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.Deployment.dll">
-      <publishTime>06/07/2018 13:16:42</publishTime>
+      <publishTime>06/14/2018 23:22:36</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.dll">
-      <publishTime>06/07/2018 13:16:42</publishTime>
+      <publishTime>06/14/2018 23:22:36</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.Razor.dll">
-      <publishTime>06/07/2018 13:16:42</publishTime>
+      <publishTime>06/14/2018 23:22:36</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
-      <publishTime>06/07/2018 13:16:44</publishTime>
+      <publishTime>06/14/2018 23:22:38</publishTime>
     </File>
     <File Include="Content/bootstrap.css">
-      <publishTime>06/07/2018 13:16:37</publishTime>
+      <publishTime>06/14/2018 23:22:29</publishTime>
     </File>
     <File Include="Content/bootstrap.min.css">
-      <publishTime>06/07/2018 13:16:37</publishTime>
+      <publishTime>06/14/2018 23:22:29</publishTime>
     </File>
     <File Include="Content/Site.css">
-      <publishTime>06/07/2018 13:16:36</publishTime>
+      <publishTime>06/14/2018 23:22:29</publishTime>
     </File>
     <File Include="favicon.ico">
-      <publishTime>06/07/2018 13:16:36</publishTime>
+      <publishTime>06/14/2018 23:22:30</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.eot">
-      <publishTime>06/07/2018 13:16:37</publishTime>
+      <publishTime>06/14/2018 23:22:30</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.svg">
-      <publishTime>06/07/2018 13:16:37</publishTime>
+      <publishTime>06/14/2018 23:22:30</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.ttf">
-      <publishTime>06/07/2018 13:16:37</publishTime>
+      <publishTime>06/14/2018 23:22:30</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.woff">
-      <publishTime>06/07/2018 13:16:37</publishTime>
+      <publishTime>06/14/2018 23:22:30</publishTime>
     </File>
     <File Include="Global.asax">
-      <publishTime>06/07/2018 13:16:36</publishTime>
+      <publishTime>06/14/2018 23:22:29</publishTime>
     </File>
     <File Include="Models/QuinielaGolEntities.edmx.diagram">
       <publishTime>06/11/2018 13:11:36</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>06/12/2018 08:16:34</publishTime>
+      <publishTime>06/14/2018 23:22:31</publishTime>
     </File>
     <File Include="Scripts/ai.0.15.0-build58334.js">
-      <publishTime>06/07/2018 13:17:33</publishTime>
+      <publishTime>06/14/2018 23:22:29</publishTime>
     </File>
     <File Include="Scripts/ai.0.15.0-build58334.min.js">
-      <publishTime>06/07/2018 13:17:33</publishTime>
+      <publishTime>06/14/2018 23:22:29</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
-      <publishTime>06/07/2018 13:16:37</publishTime>
+      <publishTime>06/14/2018 23:22:29</publishTime>
     </File>
     <File Include="Scripts/bootstrap.min.js">
-      <publishTime>06/07/2018 13:16:37</publishTime>
+      <publishTime>06/14/2018 23:22:29</publishTime>
     </File>
     <File Include="Scripts/jquery-1.10.2.js">
-      <publishTime>06/07/2018 13:16:39</publishTime>
+      <publishTime>06/14/2018 23:22:29</publishTime>
     </File>
     <File Include="Scripts/jquery-1.10.2.min.js">
-      <publishTime>06/07/2018 13:16:39</publishTime>
+      <publishTime>06/14/2018 23:22:29</publishTime>
     </File>
     <File Include="Scripts/jquery-1.10.2.min.map">
-      <publishTime>06/07/2018 13:16:39</publishTime>
+      <publishTime>06/14/2018 23:22:29</publishTime>
     </File>
     <File Include="Scripts/jquery.validate.js">
-      <publishTime>06/07/2018 13:16:45</publishTime>
+      <publishTime>06/14/2018 23:22:29</publishTime>
     </File>
     <File Include="Scripts/jquery.validate.min.js">
-      <publishTime>06/07/2018 13:16:45</publishTime>
+      <publishTime>06/14/2018 23:22:29</publishTime>
     </File>
     <File Include="Scripts/jquery.validate.unobtrusive.js">
-      <publishTime>06/07/2018 13:16:46</publishTime>
+      <publishTime>06/14/2018 23:22:29</publishTime>
     </File>
     <File Include="Scripts/jquery.validate.unobtrusive.min.js">
-      <publishTime>06/07/2018 13:16:46</publishTime>
+      <publishTime>06/14/2018 23:22:29</publishTime>
     </File>
     <File Include="Scripts/modernizr-2.6.2.js">
-      <publishTime>06/07/2018 13:16:44</publishTime>
+      <publishTime>06/14/2018 23:22:29</publishTime>
     </File>
     <File Include="Scripts/respond.js">
-      <publishTime>06/07/2018 13:16:45</publishTime>
+      <publishTime>06/14/2018 23:22:29</publishTime>
     </File>
     <File Include="Scripts/respond.min.js">
-      <publishTime>06/07/2018 13:16:45</publishTime>
+      <publishTime>06/14/2018 23:22:29</publishTime>
     </File>
     <File Include="Scripts/_references.js">
-      <publishTime>06/07/2018 13:17:33</publishTime>
+      <publishTime>06/14/2018 23:22:29</publishTime>
     </File>
     <File Include="Views/Account/ConfirmEmail.cshtml">
       <publishTime>06/07/2018 13:16:48</publishTime>
@@ -265,7 +274,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/07/2018 13:16:48</publishTime>
     </File>
     <File Include="Views/Account/Login.cshtml">
-      <publishTime>06/08/2018 08:43:14</publishTime>
+      <publishTime>06/14/2018 13:02:46</publishTime>
     </File>
     <File Include="Views/Account/Register.cshtml">
       <publishTime>06/09/2018 14:56:19</publishTime>
@@ -286,16 +295,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/07/2018 13:16:48</publishTime>
     </File>
     <File Include="Views/Home/AnotherPredicts.cshtml">
-      <publishTime>06/13/2018 13:09:28</publishTime>
+      <publishTime>06/15/2018 01:47:29</publishTime>
+    </File>
+    <File Include="Views/Home/FilteredPredicts.cshtml">
+      <publishTime>06/15/2018 02:42:31</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>06/13/2018 13:35:27</publishTime>
+      <publishTime>06/14/2018 10:54:56</publishTime>
     </File>
     <File Include="Views/Home/Matches.cshtml">
-      <publishTime>06/12/2018 08:16:34</publishTime>
+      <publishTime>06/15/2018 02:40:54</publishTime>
     </File>
     <File Include="Views/Home/Prediction.cshtml">
-      <publishTime>06/11/2018 14:31:49</publishTime>
+      <publishTime>06/14/2018 12:29:43</publishTime>
     </File>
     <File Include="Views/Manage/AddPhoneNumber.cshtml">
       <publishTime>06/07/2018 13:16:48</publishTime>
@@ -322,10 +334,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/07/2018 13:16:48</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>06/11/2018 12:08:03</publishTime>
+      <publishTime>06/14/2018 13:28:07</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
-      <publishTime>06/07/2018 13:16:48</publishTime>
+      <publishTime>06/14/2018 13:26:05</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>06/07/2018 13:16:36</publishTime>
@@ -334,7 +346,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/07/2018 13:16:36</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>06/12/2018 13:23:48</publishTime>
+      <publishTime>06/15/2018 02:51:03</publishTime>
     </File>
   </ItemGroup>
 </Project>

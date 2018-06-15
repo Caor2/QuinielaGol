@@ -428,3 +428,4 @@ C:\Users\Charles\Documents\Develop\Visual Studio Projects\QuinielaGol\Quiniela\o
 C:\Users\Charles\Documents\Develop\Visual Studio Projects\QuinielaGol\Quiniela\obj\Debug\Quiniela.csproj.CopyComplete
 C:\Users\Charles\Documents\Develop\Visual Studio Projects\QuinielaGol\Quiniela\obj\Debug\Quiniela.dll
 C:\Users\Charles\Documents\Develop\Visual Studio Projects\QuinielaGol\Quiniela\obj\Debug\Quiniela.pdb
+C:\Users\Charles\Documents\Develop\Visual Studio Projects\QuinielaGol\Quiniela\obj\Debug\Quiniela.csprojResolveAssemblyReference.cache
