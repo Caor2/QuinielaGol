@@ -1,50 +1,75 @@
 ﻿@model List<Quiniela.Models.Prediction>
-
 @{
     ViewBag.Title = "Predicciones por partido.";
+    string localFlag = Model.FirstOrDefault().Match.Local.ToString() + ".png";
+    string visitorFlag = Model.FirstOrDefault().Match.Visitor.ToString() + ".png";
 }
-
 <style>
-    
+
+    h2.prox {
+        color: cornflowerblue;
+    }
+
+    h2.act {
+        color: darkgreen;
+    }
+
+    h2.finish {
+        color: darkred;
+    }
+
     img.teamFlag {
-        height: 15px;
-        width: 20px;
+        height: 30px;
+        width: 35px;
         margin-left: 10px;
         margin-right: 10px;
         border: 2px solid;
     }
-
 </style>
 
-
 <h2>Predicciones por partido.</h2>
-
 <div class="jumbotron text-center">
     @if (Model.LongCount() > 0)
     {
         <h1>Predicciones:</h1>
-        <h2><img class="teamFlag" src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Flag_of_Spain.svg"> @Model.FirstOrDefault().Match.Local 
-    VS @Model.FirstOrDefault().Match.Visitor <img class="teamFlag" src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Flag_of_Spain.svg"> </h2>
+        <h2>
+            <img class="teamFlag" src="~/flags/@localFlag"> @Model.FirstOrDefault().Match.Local @Model.FirstOrDefault().LocalGoals
+            - @Model.FirstOrDefault().VisitorGoals @Model.FirstOrDefault().Match.Visitor <img class="teamFlag" src="~/flags/@visitorFlag">
+        </h2>
+
+        switch (Model.FirstOrDefault().Match.Status)
+        {
+            case 0:
+                <h2 class="prox">Próximo</h2>
+                break;
+            case 1:
+                <h2 class="act">En emisión</h2>
+                break;
+            case 2:
+                <h2 class="finish">Finalizado</h2>
+                break;
+        }
         <table id="predictionsTable" class="table table-bordered table-striped">
             <tr class="text-center">
                 <th class="text-center">Usuario</th>
                 <th class="text-center">Equipo Local</th>
                 <th class="text-center">GL</th>
+                <th class="text-center"></th>
                 <th class="text-center">GV</th>
                 <th class="text-center">Equipo Visitante</th>
 
             </tr>
-
             @foreach (var item in Model)
             {
-            <tr>
-                <td>@Html.ActionLink(@item.AspNetUsers.UserName, "AnotherPredicts", new { searching = @item.UserId })</td>
-                <td>@item.Match.Local</td>
-                <td>@item.LocalGoals</td>
-                <td>@item.VisitorGoals</td>
-                <td>@item.Match.Visitor</td>
+                <tr>
+                    <td>@Html.ActionLink(@item.AspNetUsers.UserName, "AnotherPredicts", new { searching = @item.UserId })</td>
+                    <td>@item.Match.Local</td>
+                    <td>@item.LocalGoals</td>
+                    <td>VS</td>
+                    <td>@item.VisitorGoals</td>
+                    <td>@item.Match.Visitor</td>
 
-            </tr>
+                </tr>
             }
         </table>
     }

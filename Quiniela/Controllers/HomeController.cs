@@ -72,7 +72,7 @@ namespace Quiniela.Controllers
             List<Ranking> usersRank = db.Ranking.ToList<Ranking>();
 
             indexModels model = new indexModels();
-            model.matches = todayMatches;
+            model.matches = todayMatches.OrderBy(x => x.Date).ToList();
             //model.predictions = usersPredictions;
             model.ranking = usersRank.OrderByDescending(o => o.Points).ToList();
 
@@ -171,7 +171,7 @@ namespace Quiniela.Controllers
                 m.Date = m.Date.Value.AddHours(-6);
             }
 
-            return View(matches);
+            return View(matches.OrderBy(x => x.Date).ToList());
         }
 
         public ActionResult AnotherPredicts(string searching)

@@ -4,6 +4,20 @@
     ViewBag.Title = "Predicciones";
 }
 
+<style>
+    img.teamFlag {
+        height: 20px;
+        width: 25px;
+        margin-left: 10px;
+        margin-right: 10px;
+        border: 2px solid;
+    }
+
+    td.Winner {
+        color: indianred;
+    }
+</style>
+
 <h2>Predicciones.</h2>
 
 <div class="jumbotron text-center">
@@ -14,21 +28,64 @@
             <tr class="text-center">
                 <th class="text-center">Equipo Local</th>
                 <th class="text-center">GL</th>
+                <th class="text-center"></th>
                 <th class="text-center">GV</th>
                 <th class="text-center">Equipo Visitante</th>
             </tr>
-            
+
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>@item.Match.Local</td>
-                    <td>@item.LocalGoals</td>
-                    <td>@item.VisitorGoals   </td>
-                    <td>@item.Match.Visitor</td>
+                    @{
+                        string flagLocal = @item.Match.Local.ToString() + ".png";
+                        string flagVisitor = @item.Match.Visitor.ToString() + ".png";
+
+
+                    }
+
+
+                    <td class="text-right">@item.Match.Local<img class="teamFlag" src="~/flags/@flagLocal"></td>
+                    @{
+                        if (item.Match.Status != 0)
+                        {
+                            if (item.LocalGoals == item.Match.LocalGoals && item.LocalGoals > item.Match.VisitorGoals)
+                            {
+                                <td class="Winner">@item.LocalGoals</td>
+                                <td>VS</td>
+                                <td>@item.VisitorGoals</td>
+                            }
+                            else if (item.VisitorGoals == item.Match.VisitorGoals && item.VisitorGoals > item.Match.LocalGoals)
+                            {
+                                <td>@item.LocalGoals</td>
+                                <td>VS</td>
+                                <td class="Winner">@item.VisitorGoals</td>
+                            }
+                            else if (item.VisitorGoals == item.Match.VisitorGoals && item.LocalGoals == item.Match.LocalGoals)
+                            {
+                                <td class="Winner">@item.LocalGoals</td>
+                                <td>VS</td>
+                                <td class="Winner">@item.VisitorGoals</td>
+                            }
+                            else {
+                                <td>@item.LocalGoals</td>
+                                <td>VS</td>
+                                <td>@item.VisitorGoals</td>
+                            }
+                        }
+                        else {
+                            <td>@item.LocalGoals</td>
+                            <td>VS</td>
+                            <td>@item.VisitorGoals</td>
+                        }
+
+
+                    }
+
+                    <td class="text-left"><img class="teamFlag" src="~/flags/@flagVisitor">@item.Match.Visitor</td>
                 </tr>
-            }
+                        }
         </table>
-    }
-    else
-    { <h1>No hay predicciones.</h1>}
+                        }
+                        else
+                        { <h1>No hay predicciones.</h1>}
 </div>

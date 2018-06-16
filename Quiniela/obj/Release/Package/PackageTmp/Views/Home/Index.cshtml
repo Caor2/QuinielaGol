@@ -4,52 +4,82 @@
     ViewBag.Title = "UNI-Quiniela";
 }
 
+<style>
+    a.prox {
+        color: cornflowerblue;
+    }
+
+    a.active {
+        color: darkgreen;
+    }
+
+    a.finish {
+        color: darkred;
+    }
+
+    img.teamFlag {
+        height: 20px;
+        width: 25px;
+        margin-left: 10px;
+        margin-right: 10px;
+        border: 2px solid;
+    }
+</style>
+
 <div class="jumbotron text-center">
-    
+
     @if (Model.matches.Count > 0)
     {
         <h1>Partidos de hoy.</h1>
-        <table id="nextTable" class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th class="text-center">Fecha</th>
-                    <th class="text-center">Local</th>
-                    <th class="text-center">GL</th>
-                    <th></th>
-                    <th class="text-center">GV</th>
-                    <th class="text-center">Visitante</th>
-                    <th class="text-center">Estado</th>
-                </tr>
-            </thead>
-            @foreach (var item in Model.matches)
-            {
-            <tr>
-                <td>@item.Date</td>
-                <td>@item.Local</td>
-                <td>@item.LocalGoals</td>
-                <td>VS</td>
-                <td>@item.VisitorGoals</td>
-                <td>@item.Visitor</td>
-                @switch (@item.Status)
+        <div class="table-responsive">
+            <table id="nextTable" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th class="text-center">Fecha</th>
+                        <th class="text-center">Local</th>
+                        <th class="text-center">GL</th>
+                        <th></th>
+                        <th class="text-center">GV</th>
+                        <th class="text-center">Visitante</th>
+                        <th class="text-center">Estado</th>
+                    </tr>
+                </thead>
+                @foreach (var item in Model.matches)
                 {
-                    case 0:
-                        <td style="color: cornflowerblue">Próximo</td>
-                        break;
-                    case 1:
-                        <td style="color: green">En emisión</td>
-                        break;
-                    case 2:
-                        <td style="color: indianred">Finalizado</td>
-                        break;
-                }
-            </tr>
-            }
-        </table>
-    }
-    else {
-            <h1>No hay partidos para hoy.</h1>
-        }
-    
+                    <tr>
+                        <td>@item.Date.Value.ToString("dd/MM hh:mm")</td>
+
+                        @{
+                            string flagLocal = @item.Local.ToString() + ".png";
+                            string flagVisitor = @item.Visitor.ToString() + ".png";
+                        }
+
+                        <td><img class="teamFlag" src="~/flags/@flagLocal">@item.Local</td>
+                        <td>@item.LocalGoals</td>
+                        <td>VS</td>
+                        <td>@item.VisitorGoals</td>
+                        <td>@item.Visitor<img class="teamFlag" src="~/flags/@flagVisitor"></td>
+                        @switch (@item.Status)
+                        {
+                            case 0:
+                                <td>@Html.ActionLink("Próximo", "FilteredPredicts", new { searchFor = item.Id }, new { @class = "prox" })</td>
+                                break;
+                            case 1:
+                                <td>@Html.ActionLink("En emisión", "FilteredPredicts", new { searchFor = item.Id }, new { @class = "active" })</td>
+                                break;
+                            case 2:
+                                <td>@Html.ActionLink("Finalizado", "FilteredPredicts", new { searchFor = item.Id }, new { @class = "finish" })</td>
+                                break;
+                        }
+                    </tr>
+                            }
+            </table>
+        </div>
+                            }
+                            else {
+                                <h1>No hay partidos para hoy.</h1>
+                            }
+
 </div>
 
 <div class="jumbotron text-center">
@@ -65,7 +95,7 @@
                     <th class="text-center">Puntos</th>
                 </tr>
             </thead>
-            
+
             @for (int i = 0; i < Model.ranking.Count; i++)
             {
                 int count = i + 1;
@@ -76,12 +106,12 @@
                 </tr>
             }
             @*@foreach (var item in Model.ranking)
-            {
-                <tr>
-                    <td>@Html.ActionLink(item.UserName, "AnotherPredicts", new { searching = item.Id })</td>
-                    <td>@item.Points</td>
-                </tr>
-            }*@
+                {
+                    <tr>
+                        <td>@Html.ActionLink(item.UserName, "AnotherPredicts", new { searching = item.Id })</td>
+                        <td>@item.Points</td>
+                    </tr>
+                }*@
         </table>
     }
     else { <h1>Ranking no disponible.</h1>}
@@ -91,3 +121,4 @@
 @*<div>
         @Html.ActionLink("Descargar", "downloadPredictions")
     </div>*@
+

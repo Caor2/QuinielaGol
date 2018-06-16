@@ -5,7 +5,6 @@
 }
 
 <style>
-
     a.prox {
         color: cornflowerblue;
     }
@@ -19,17 +18,16 @@
     }
 
     img.teamFlag {
-        height: 15px;
-        width: 20px;
+        height: 20px;
+        width: 25px;
         margin-left: 10px;
         margin-right: 10px;
         border: 2px solid;
     }
-
 </style>
 
 <div class="jumbotron text-center">
-    
+
     @if (Model.matches.Count > 0)
     {
         <h1>Partidos de hoy.</h1>
@@ -47,35 +45,41 @@
                     </tr>
                 </thead>
                 @foreach (var item in Model.matches)
-            {
-            <tr>
-                <td>@item.Date.Value.ToString("dd/MM hh:mm")</td>
-                <td><img class="teamFlag" src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Flag_of_Spain.svg">@item.Local</td>
-                <td>@item.LocalGoals</td>
-                <td>VS</td>
-                <td>@item.VisitorGoals</td>
-                <td>@item.Visitor<img class="teamFlag" src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Flag_of_Spain.svg"></td>
-                @switch (@item.Status)
                 {
-                    case 0:
-                <td>@Html.ActionLink("Próximo", "FilteredPredicts", new { searchFor = item.Id }, new { @class = "prox" })</td>
-                        break;
-                    case 1:
-                <td>@Html.ActionLink("En emisión", "FilteredPredicts", new { searchFor = item.Id }, new { @class = "active" })</td>
-                        break;
-                    case 2:
-                <td>@Html.ActionLink("Finalizado", "FilteredPredicts", new { searchFor = item.Id }, new { @class = "finish" })</td>
-                        break;
-                }
-            </tr>
-            }
+                    <tr>
+                        <td>@item.Date.Value.ToString("dd/MM hh:mm")</td>
+
+                        @{
+                            string flagLocal = @item.Local.ToString() + ".png";
+                            string flagVisitor = @item.Visitor.ToString() + ".png";
+                        }
+
+                        <td class="text-right">@item.Local<img class="teamFlag" src="~/flags/@flagLocal"></td>
+                        <td>@item.LocalGoals</td>
+                        <td>VS</td>
+                        <td>@item.VisitorGoals</td>
+                        <td class="text-left"><img class="teamFlag" src="~/flags/@flagVisitor">@item.Visitor</td>
+                        @switch (@item.Status)
+                        {
+                            case 0:
+                                <td>@Html.ActionLink("Próximo", "FilteredPredicts", new { searchFor = item.Id }, new { @class = "prox" })</td>
+                                break;
+                            case 1:
+                                <td>@Html.ActionLink("En emisión", "FilteredPredicts", new { searchFor = item.Id }, new { @class = "active" })</td>
+                                break;
+                            case 2:
+                                <td>@Html.ActionLink("Finalizado", "FilteredPredicts", new { searchFor = item.Id }, new { @class = "finish" })</td>
+                                break;
+                        }
+                    </tr>
+                            }
             </table>
         </div>
-    }
-    else {
-            <h1>No hay partidos para hoy.</h1>
-        }
-    
+                            }
+                            else {
+                                <h1>No hay partidos para hoy.</h1>
+                            }
+
 </div>
 
 <div class="jumbotron text-center">
@@ -91,7 +95,7 @@
                     <th class="text-center">Puntos</th>
                 </tr>
             </thead>
-            
+
             @for (int i = 0; i < Model.ranking.Count; i++)
             {
                 int count = i + 1;
@@ -102,12 +106,12 @@
                 </tr>
             }
             @*@foreach (var item in Model.ranking)
-            {
-                <tr>
-                    <td>@Html.ActionLink(item.UserName, "AnotherPredicts", new { searching = item.Id })</td>
-                    <td>@item.Points</td>
-                </tr>
-            }*@
+                {
+                    <tr>
+                        <td>@Html.ActionLink(item.UserName, "AnotherPredicts", new { searching = item.Id })</td>
+                        <td>@item.Points</td>
+                    </tr>
+                }*@
         </table>
     }
     else { <h1>Ranking no disponible.</h1>}
@@ -117,3 +121,4 @@
 @*<div>
         @Html.ActionLink("Descargar", "downloadPredictions")
     </div>*@
+
