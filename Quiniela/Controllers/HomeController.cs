@@ -177,7 +177,7 @@ namespace Quiniela.Controllers
         public ActionResult AnotherPredicts(string searching)
         {
             List<Prediction> otherPredicts = db.Prediction.Where(x => x.UserId == searching).ToList();
-            return View(otherPredicts);
+            return View(otherPredicts.OrderBy(x => x.Match.Date).ToList());
         }
 
         public ActionResult FilteredPredicts(int searchFor)

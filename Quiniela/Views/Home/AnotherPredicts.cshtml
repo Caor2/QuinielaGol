@@ -2,9 +2,11 @@
 
 @{
     ViewBag.Title = "Predicciones";
+    bool applyColor = false;
 }
 
 <style>
+
     img.teamFlag {
         height: 20px;
         width: 25px;
@@ -13,9 +15,18 @@
         border: 2px solid;
     }
 
-    td.Winner {
-        color: indianred;
+    td.Score {
+        background-color: green !important;
     }
+
+    td.Winner {
+        background-color: indianred !important;
+    }
+
+    td.Tie {
+        background-color: steelblue !important;
+    }
+
 </style>
 
 <h2>Predicciones.</h2>
@@ -39,53 +50,67 @@
                     @{
                         string flagLocal = @item.Match.Local.ToString() + ".png";
                         string flagVisitor = @item.Match.Visitor.ToString() + ".png";
-
-
                     }
-
-
                     <td class="text-right">@item.Match.Local<img class="teamFlag" src="~/flags/@flagLocal"></td>
                     @{
                         if (item.Match.Status != 0)
                         {
-                            if (item.LocalGoals == item.Match.LocalGoals && item.LocalGoals > item.Match.VisitorGoals)
+                            applyColor = false;
+
+                            //Score
+                            if (item.VisitorGoals == item.Match.VisitorGoals && item.LocalGoals == item.Match.LocalGoals)
+                            {
+                                <td class="Score">@item.LocalGoals</td>
+                                <td class="Score">VS</td>
+                                <td class="Score">@item.VisitorGoals</td>
+                                applyColor = true;
+                            }
+                            //Tie
+                            else if (item.VisitorGoals == item.LocalGoals && item.Match.LocalGoals == item.Match.VisitorGoals)
                             {
                                 <td class="Winner">@item.LocalGoals</td>
-                                <td>VS</td>
-                                <td>@item.VisitorGoals</td>
+                                <td class="Winner">VS</td>
+                                <td class="Winner">@item.VisitorGoals</td>
+                                applyColor = true;
                             }
-                            else if (item.VisitorGoals == item.Match.VisitorGoals && item.VisitorGoals > item.Match.LocalGoals)
+                            //Local Wins
+                            else if (item.LocalGoals > item.VisitorGoals && item.Match.LocalGoals > item.Match.VisitorGoals)
+                            {
+                                <td class="Winner">@item.LocalGoals</td>
+                                <td class="Winner">VS</td>
+                                <td>@item.VisitorGoals</td>
+                                applyColor = true;
+                            }
+                            //Visitor Wins
+                            else if (item.VisitorGoals > item.LocalGoals && item.Match.VisitorGoals > item.Match.LocalGoals)
                             {
                                 <td>@item.LocalGoals</td>
-                                <td>VS</td>
+                                <td class="Winner">VS</td>
                                 <td class="Winner">@item.VisitorGoals</td>
+                                applyColor = true;
                             }
-                            else if (item.VisitorGoals == item.Match.VisitorGoals && item.LocalGoals == item.Match.LocalGoals)
+                            //Maybe next time...
+                            if (!applyColor)
                             {
-                                <td class="Winner">@item.LocalGoals</td>
-                                <td>VS</td>
-                                <td class="Winner">@item.VisitorGoals</td>
-                            }
-                            else {
                                 <td>@item.LocalGoals</td>
                                 <td>VS</td>
                                 <td>@item.VisitorGoals</td>
                             }
                         }
-                        else {
+                        else
+                        {
                             <td>@item.LocalGoals</td>
                             <td>VS</td>
                             <td>@item.VisitorGoals</td>
                         }
 
-
                     }
 
                     <td class="text-left"><img class="teamFlag" src="~/flags/@flagVisitor">@item.Match.Visitor</td>
                 </tr>
-                        }
+            }
         </table>
-                        }
-                        else
-                        { <h1>No hay predicciones.</h1>}
+    }
+    else
+    { <h1>No hay predicciones.</h1>}
 </div>
