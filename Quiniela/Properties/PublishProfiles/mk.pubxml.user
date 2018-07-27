@@ -115,7 +115,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/14/2018 16:36:43</publishTime>
     </File>
     <File Include="bin/Quiniela.dll">
-      <publishTime>06/16/2018 10:55:20</publishTime>
+      <publishTime>06/28/2018 14:40:16</publishTime>
     </File>
     <File Include="bin/Quiniela.pdb">
       <publishTime>01/01/0001 00:00:00</publishTime>
@@ -391,19 +391,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/14/2018 16:36:40</publishTime>
     </File>
     <File Include="Views/Home/AnotherPredicts.cshtml">
-      <publishTime>06/16/2018 10:50:44</publishTime>
+      <publishTime>06/18/2018 08:10:11</publishTime>
     </File>
     <File Include="Views/Home/FilteredPredicts.cshtml">
-      <publishTime>06/16/2018 10:53:18</publishTime>
+      <publishTime>06/18/2018 08:10:11</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>06/16/2018 10:34:17</publishTime>
+      <publishTime>06/16/2018 11:44:20</publishTime>
     </File>
     <File Include="Views/Home/Matches.cshtml">
-      <publishTime>06/16/2018 10:46:21</publishTime>
+      <publishTime>06/16/2018 12:59:17</publishTime>
     </File>
     <File Include="Views/Home/Prediction.cshtml">
-      <publishTime>06/16/2018 10:45:02</publishTime>
+      <publishTime>06/16/2018 12:14:01</publishTime>
     </File>
     <File Include="Views/Manage/AddPhoneNumber.cshtml">
       <publishTime>06/14/2018 16:36:40</publishTime>
@@ -430,7 +430,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/14/2018 16:36:40</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>06/15/2018 08:18:45</publishTime>
+      <publishTime>06/28/2018 14:36:14</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
       <publishTime>06/15/2018 08:18:45</publishTime>

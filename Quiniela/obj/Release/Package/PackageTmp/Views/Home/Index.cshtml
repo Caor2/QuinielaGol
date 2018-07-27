@@ -54,11 +54,11 @@
                             string flagVisitor = @item.Visitor.ToString() + ".png";
                         }
 
-                        <td><img class="teamFlag" src="~/flags/@flagLocal">@item.Local</td>
+                        <td class="text-right">@item.Local<img class="teamFlag" src="~/flags/@flagLocal"></td>
                         <td>@item.LocalGoals</td>
                         <td>VS</td>
                         <td>@item.VisitorGoals</td>
-                        <td>@item.Visitor<img class="teamFlag" src="~/flags/@flagVisitor"></td>
+                        <td class="text-left"><img class="teamFlag" src="~/flags/@flagVisitor">@item.Visitor</td>
                         @switch (@item.Status)
                         {
                             case 0:

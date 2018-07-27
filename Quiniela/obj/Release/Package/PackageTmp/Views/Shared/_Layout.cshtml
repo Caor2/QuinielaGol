@@ -33,7 +33,16 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - @ViewBag.Title</p>
+            @{
+                string title = ViewBag.Title;
+                if (title == "UNI-Quiniela")
+                {
+                    <p>&copy; @DateTime.Now.Year - @ViewBag.Title - Resultados no oficiales.</p>
+                }
+                else {
+                    <p>&copy; @DateTime.Now.Year - @ViewBag.Title</p>
+                }
+            }
         </footer>
     </div>
 

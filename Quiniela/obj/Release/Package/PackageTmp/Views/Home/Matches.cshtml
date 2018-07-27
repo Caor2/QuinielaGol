@@ -25,7 +25,6 @@
         margin-right: 10px;
         border: 2px solid;
     }
-
 </style>
 
 
@@ -47,18 +46,18 @@
             </thead>
             @foreach (var item in Model)
             {
-                    <tr>
-                        @{
-                            string flagLocal = @item.Local.ToString() + ".png";
-                            string flagVisitor = @item.Visitor.ToString() + ".png";
-                        }
-                        <td>@item.Id</td>
-                        <td>@item.Date.Value.ToString("dd/MM hh:mm")</td>
-                        <td><img class="teamFlag" src="~/flags/@flagLocal">@item.Local</td>
-                        <td>@item.LocalGoals</td>
-                        <td>VS</td>
-                        <td>@item.VisitorGoals</td>
-                    <td>@item.Visitor<img class="teamFlag" src="~/flags/@flagVisitor"></td>
+                <tr>
+                    @{
+                        string flagLocal = @item.Local.ToString() + ".png";
+                        string flagVisitor = @item.Visitor.ToString() + ".png";
+                    }
+                    <td>@item.Id</td>
+                    <td>@item.Date.Value.ToString("dd/MM hh:mm")</td>
+                    <td class="text-right">@item.Local<img class="teamFlag" src="~/flags/@flagLocal"></td>
+                    <td>@item.LocalGoals</td>
+                    <td>VS</td>
+                    <td>@item.VisitorGoals</td>
+                    <td class="text-left"><img class="teamFlag" src="~/flags/@flagVisitor">@item.Visitor</td>
                     @switch (@item.Status)
                 {
                     case 0:
@@ -72,7 +71,7 @@
                             break;
                     }
                 </tr>
-                    }
+                        }
         </table>
     </div>
 </div>

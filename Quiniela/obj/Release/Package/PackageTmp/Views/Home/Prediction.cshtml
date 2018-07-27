@@ -43,11 +43,11 @@
                         string flagLocal = @item.Match.Local.ToString() + ".png";
                         string flagVisitor = @item.Match.Visitor.ToString() + ".png";
                     }
-                    <td><img class="teamFlag" src="~/flags/@flagLocal">@item.Match.Local</td>
+                    <td class="text-right">@item.Match.Local<img class="teamFlag" src="~/flags/@flagLocal"></td>
                     <td>@item.LocalGoals</td>
                     <td>VS</td>
                     <td>@item.VisitorGoals</td>
-                    <td>@item.Match.Visitor<img class="teamFlag" src="~/flags/@flagVisitor"></td>
+                    <td class="text-left"><img class="teamFlag" src="~/flags/@flagVisitor">@item.Match.Visitor</td>
                 </tr>
             }
         </table>

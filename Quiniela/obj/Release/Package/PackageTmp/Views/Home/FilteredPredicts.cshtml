@@ -1,12 +1,23 @@
 ﻿@model List<Quiniela.Models.Prediction>
-
 @{
     ViewBag.Title = "Predicciones por partido.";
     string localFlag = Model.FirstOrDefault().Match.Local.ToString() + ".png";
     string visitorFlag = Model.FirstOrDefault().Match.Visitor.ToString() + ".png";
+    bool applyColor = false;
 }
-
 <style>
+
+    h2.prox {
+        color: cornflowerblue;
+    }
+
+    h2.act {
+        color: darkgreen;
+    }
+
+    h2.finish {
+        color: darkred;
+    }
 
     img.teamFlag {
         height: 30px;
@@ -16,17 +27,42 @@
         border: 2px solid;
     }
 
+    td.Score {
+        background-color: green !important;
+    }
+
+    td.Winner {
+        background-color: indianred !important;
+    }
+
+    td.Tie {
+        background-color: steelblue !important;
+    }
+
 </style>
 
-
 <h2>Predicciones por partido.</h2>
-
 <div class="jumbotron text-center">
     @if (Model.LongCount() > 0)
     {
         <h1>Predicciones:</h1>
-        <h2><img class="teamFlag" src="~/flags/@localFlag"> @Model.FirstOrDefault().Match.Local 
-    VS @Model.FirstOrDefault().Match.Visitor <img class="teamFlag" src="~/flags/@visitorFlag"> </h2>
+        <h2 class="text-center">
+            <img class="teamFlag" src="~/flags/@localFlag"> @Model.FirstOrDefault().Match.Local @Model.FirstOrDefault().Match.LocalGoals
+            - @Model.FirstOrDefault().Match.VisitorGoals @Model.FirstOrDefault().Match.Visitor <img class="teamFlag" src="~/flags/@visitorFlag">
+        </h2>
+
+        switch (Model.FirstOrDefault().Match.Status)
+        {
+            case 0:
+                <h2 class="prox">Próximo</h2>
+                break;
+            case 1:
+                <h2 class="act">En emisión</h2>
+                break;
+            case 2:
+                <h2 class="finish">Finalizado</h2>
+                break;
+        }
         <table id="predictionsTable" class="table table-bordered table-striped">
             <tr class="text-center">
                 <th class="text-center">Usuario</th>
@@ -37,18 +73,67 @@
                 <th class="text-center">Equipo Visitante</th>
 
             </tr>
-
             @foreach (var item in Model)
             {
-            <tr>
-                <td>@Html.ActionLink(@item.AspNetUsers.UserName, "AnotherPredicts", new { searching = @item.UserId })</td>
-                <td>@item.Match.Local</td>
-                <td>@item.LocalGoals</td>
-                <td>VS</td>
-                <td>@item.VisitorGoals</td>
-                <td>@item.Match.Visitor</td>
+                <tr>
+                    <td>@Html.ActionLink(@item.AspNetUsers.UserName, "AnotherPredicts", new { searching = @item.UserId })</td>
+                    <td>@item.Match.Local</td>
+                    @{
+                        if (item.Match.Status != 0)
+                        {
+                            applyColor = false;
 
-            </tr>
+                            //Score
+                            if (item.VisitorGoals == item.Match.VisitorGoals && item.LocalGoals == item.Match.LocalGoals)
+                            {
+                                <td class="Score">@item.LocalGoals</td>
+                                <td class="Score">VS</td>
+                                <td class="Score">@item.VisitorGoals</td>
+                                applyColor = true;
+                            }
+                            //Tie
+                            else if (item.VisitorGoals == item.LocalGoals && item.Match.LocalGoals == item.Match.VisitorGoals)
+                            {
+                                <td class="Winner">@item.LocalGoals</td>
+                                <td class="Winner">VS</td>
+                                <td class="Winner">@item.VisitorGoals</td>
+                                applyColor = true;
+                            }
+                            //Local wins
+                            else if (item.LocalGoals > item.VisitorGoals && item.Match.LocalGoals > item.Match.VisitorGoals)
+                            {
+                                <td class="Winner">@item.LocalGoals</td>
+                                <td class="Winner">VS</td>
+                                <td>@item.VisitorGoals</td>
+                                applyColor = true;
+                            }
+                            //Visitor wins
+                            else if (item.VisitorGoals > item.LocalGoals && item.Match.VisitorGoals > item.Match.LocalGoals)
+                            {
+                                <td>@item.LocalGoals</td>
+                                <td class="Winner">VS</td>
+                                <td class="Winner">@item.VisitorGoals</td>
+                                applyColor = true;
+                            }
+                            //Maybe next time...
+                            if (!applyColor)
+                            {
+                                <td>@item.LocalGoals</td>
+                                <td>VS</td>
+                                <td>@item.VisitorGoals</td>
+                            }
+                        }
+                        else
+                        {
+                            <td>@item.LocalGoals</td>
+                            <td>VS</td>
+                            <td>@item.VisitorGoals</td>
+                        }
+
+                    }
+                    <td>@item.Match.Visitor</td>
+
+                </tr>
             }
         </table>
     }

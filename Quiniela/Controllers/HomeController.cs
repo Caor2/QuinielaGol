@@ -56,12 +56,14 @@ namespace Quiniela.Controllers
             UpdateMatchEstatus();
             List<Match> todayMatches = db.Match.Where(x => x.Date.Value.Day == DateTime.Today.Day).ToList<Match>();
             
+            /*
             int nearDay = db.Match.Where(x => x.Status == 0 && x.Date.Value.Day != DateTime.Today.Day).FirstOrDefault().Date.Value.Day;
             List<Match> nextMatches = db.Match.Where(x => x.Date.Value.Day == nearDay).ToList<Match>();
             foreach (Match m in nextMatches)
             {
                 m.Date = m.Date.Value.AddHours(-6);
             }
+            */
             
             foreach (Match match in todayMatches)
             {
